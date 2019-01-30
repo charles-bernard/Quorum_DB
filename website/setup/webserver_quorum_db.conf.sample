@@ -4,7 +4,7 @@
 
 <VirtualHost *:80>
      ServerAdmin YOUR_EMAIL_ADDRESS
-     ServerName webserver_quorum_db
+     ServerName quorum_db
      DocumentRoot REPO_PATH/website
      <Directory REPO_PATH/website>
              Options Indexes FollowSymLinks MultiViews
