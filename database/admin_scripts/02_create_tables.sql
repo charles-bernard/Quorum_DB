@@ -18,11 +18,6 @@ CREATE TABLE environment (
 	properties VARCHAR
 );
 
-CREATE TABLE omics (
-	dataset_id INT PRIMARY KEY,
-	omics_type VARCHAR
-);
-
 CREATE TABLE pathway (
 	pathway_id INT PRIMARY KEY,
 	db_pathway_id VARCHAR,
@@ -53,15 +48,7 @@ CREATE TABLE taxonomy (
 	ranks VARCHAR 
 );
 
-
-
 /* LEVEL 1 TABLES */
-CREATE TABLE analysed_taxons (
-	dataset_id INT REFERENCES omics ON DELETE CASCADE ON UPDATE CASCADE,
-	tax_id CHAR(30) REFERENCES taxonomy ON UPDATE CASCADE,
-	PRIMARY KEY (dataset_id, tax_id)
-);
-
 CREATE TABLE environment_members (
 	env_id INT REFERENCES environment ON DELETE CASCADE ON UPDATE CASCADE,
 	tax_id CHAR(30) REFERENCES taxonomy ON UPDATE CASCADE,
@@ -82,6 +69,12 @@ CREATE TABLE gene (
 	UNIQUE (tax_id, gene_name)
 );
 
+CREATE TABLE omics (
+	dataset_id INT PRIMARY KEY,
+	omics_type VARCHAR
+	reference INT REFERENCES reference ON UPDATE CASCADE
+);
+
 
 CREATE TABLE ref_signal (
 	reference_id INT REFERENCES reference ON DELETE CASCADE ON UPDATE CASCADE,
@@ -89,21 +82,20 @@ CREATE TABLE ref_signal (
 	PRIMARY KEY (reference_id, signal_id)
 );
 
-CREATE TABLE ref_omics (
-	reference_id INT REFERENCES reference ON DELETE CASCADE ON UPDATE CASCADE,
+/* LEVEL 2 TABLES */
+CREATE TABLE analysed_taxons (
 	dataset_id INT REFERENCES omics ON DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY (reference_id, dataset_id)
+	tax_id CHAR(30) REFERENCES taxonomy ON UPDATE CASCADE,
+	PRIMARY KEY (dataset_id, tax_id)
 );
 
-
-/* LEVEL 2 TABLES */
 CREATE TABLE composite_gene (
 	domain_id INT,
 	tax_id VARCHAR,
 	gene_name VARCHAR,
 	domain_order INT,
-	FOREIGN KEY (domain_id) REFERENCES domain(domain_id),
-	FOREIGN KEY (tax_id, gene_name) REFERENCES gene (tax_id, gene_name),
+	FOREIGN KEY (domain_id) REFERENCES domain(domain_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (tax_id, gene_name) REFERENCES gene (tax_id, gene_name) ON UPDATE CASCADE,
 	PRIMARY KEY(domain_id, tax_id, gene_name)
 );
 
