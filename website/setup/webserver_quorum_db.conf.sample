@@ -1,0 +1,17 @@
+# Once you'll have modified this block,
+# copy it as follows:
+# sudo cp webserver_quorum_db.conf /etc/apache2/sites-available/
+
+<VirtualHost *:80>
+     ServerAdmin YOUR_EMAIL_ADDRESS
+     ServerName webserver_quorum_db
+     DocumentRoot REPO_PATH/website
+     <Directory REPO_PATH/website>
+             Options Indexes FollowSymLinks MultiViews
+             DirectoryIndex index.html index.php
+             AllowOverride All
+             Order Allow,Deny
+             Allow from all
+             Require all granted
+     </Directory>
+</VirtualHost>
