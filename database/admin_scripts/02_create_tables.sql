@@ -136,7 +136,7 @@ CREATE TABLE pathway_genes (
 );
 
 CREATE TABLE sequence (
-	tax_id INT,
+	tax_id VARCHAR,
 	gene_name VARCHAR,
 	seq_type VARCHAR,
 	fa_path VARCHAR NOT NULL,
