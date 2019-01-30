@@ -25,7 +25,7 @@ CREATE TABLE reference (
 
 CREATE TABLE taxonomy (
 	tax_id VARCHAR PRIMARY KEY,
-	ncbi_id INT,
+	ncbi_tax_id INT,
 	taxon_name VARCHAR,
 	rank VARCHAR,
 	lineage VARCHAR,
@@ -76,6 +76,7 @@ CREATE TABLE signal (
 	signal_trivial_name VARCHAR,
 	signal_systematic_name VARCHAR,
 	signal_chemical_formula VARCHAR,
+	peptide_sequence VARCHAR,
 	reference_id INT REFERENCES reference ON UPDATE CASCADE,
 	structure_img BYTEA
 );
@@ -109,6 +110,7 @@ CREATE TABLE function (
 	gene_name VARCHAR,
 	bio_process_id INT,
 	function VARCHAR,
+	info VARCHAR,
 	reference_id INT REFERENCES reference ON UPDATE CASCADE,
 	FOREIGN KEY (tax_id, gene_name) REFERENCES gene (tax_id, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (bio_process_id) REFERENCES bio_process (bio_process_id) ON DELETE CASCADE ON UPDATE CASCADE,

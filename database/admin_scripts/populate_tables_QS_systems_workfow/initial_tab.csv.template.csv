@@ -1,0 +1,3 @@
+signal_supercategory	signal_family	signal_trivial_name	signal_systematic_name	signal_chemical_formula	peptide_sequence	ncbi_tax_id	taxon_name	gene_name	gene_id	db_gene_id	gene_coordinates	prot_id	db_prot_id	function	info	pubmed_id
+autoinducer peptide	lantibiotic	nisin				1360	Lactobacillus lactis	nisA	HM219853.1	Nucleotide	828__1001	ADJ56352.1	Protein	synthase		15374645
+autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)				SKPDIVG	1409	Bacillus sp.	nprX	KY412438.1	Nucleotide		AVD29696.1	Protein	synthase		20502894
