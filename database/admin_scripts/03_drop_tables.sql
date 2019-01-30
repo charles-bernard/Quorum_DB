@@ -6,7 +6,6 @@ DROP TABLE function;
 DROP TABLE pathway_genes;
 DROP TABLE sequence;
 
-
 /* LEVEL 1 TABLES */
 DROP TABLE bio_process_pathways;
 DROP TABLE environment;

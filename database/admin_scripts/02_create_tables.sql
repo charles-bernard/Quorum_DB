@@ -4,16 +4,18 @@ CREATE TABLE bio_process (
 	bio_process VARCHAR NOT NULL
 );
 
+-- FOR FUTURE ANALYSES
 CREATE TABLE domain (
-	domain_id SERIAL PRIMARY KEY,
-	db_domain_id VARCHAR,
+	interpro_id VARCHAR PRIMARY KEY,
 	domain_name VARCHAR NOT NULL
 );
 
+-- FOR JEROME
 CREATE TABLE pathway (
 	pathway_id SERIAL PRIMARY KEY,
+	pathway_name VARCHAR,
 	db_pathway_id VARCHAR,
-	pathway_name VARCHAR
+	db_name VARCHAR
 );
 
 CREATE TABLE reference (
@@ -23,10 +25,9 @@ CREATE TABLE reference (
 	isbn VARCHAR
 );
 
-CREATE TABLE taxonomy (
-	tax_id VARCHAR PRIMARY KEY,
+CREATE TABLE species (
+	species_name VARCHAR PRIMARY KEY,
 	ncbi_tax_id INT,
-	taxon_name VARCHAR,
 	rank VARCHAR,
 	lineage VARCHAR,
 	lineage_ranks VARCHAR
@@ -34,6 +35,7 @@ CREATE TABLE taxonomy (
 
 
 /* LEVEL 1 TABLES */
+-- FOR JEROME
 CREATE TABLE bio_process_pathways (
 	bio_process_id INT REFERENCES bio_process ON DELETE CASCADE ON UPDATE CASCADE,
 	pathway_id INT REFERENCES pathway ON DELETE CASCADE ON UPDATE CASCADE,
@@ -41,6 +43,7 @@ CREATE TABLE bio_process_pathways (
 
 );
 
+-- FOR FUTURE ANALYSES
 CREATE TABLE environment (
 	env_id SERIAL PRIMARY KEY,
 	location VARCHAR,
@@ -63,6 +66,7 @@ CREATE TABLE gene (
 	UNIQUE (tax_id, gene_name)
 );
 
+-- FOR JEROME
 CREATE TABLE omics (
 	dataset_id INT PRIMARY KEY,
 	omics_type VARCHAR,
@@ -83,22 +87,25 @@ CREATE TABLE signal (
 
 
 /* LEVEL 2 TABLES */
+-- FOR JEROME
 CREATE TABLE analysed_taxons (
 	dataset_id INT REFERENCES omics ON DELETE CASCADE ON UPDATE CASCADE,
 	tax_id CHAR(30) REFERENCES taxonomy ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (dataset_id, tax_id)
 );
 
+-- FOR FUTURE ANALYSES
 CREATE TABLE composite_gene (
-	domain_id INT,
+	interpro_id VARCHAR,
 	tax_id VARCHAR,
 	gene_name VARCHAR,
 	domain_order INT,
-	FOREIGN KEY (domain_id) REFERENCES domain (domain_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (interpro_id) REFERENCES domain (interpro_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (tax_id, gene_name) REFERENCES gene (tax_id, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY(domain_id, tax_id, gene_name)
+	PRIMARY KEY(interpro_id, tax_id, gene_name)
 );
 
+-- FOR FUTURE ANALYSES
 CREATE TABLE environment_members (
 	env_id INT REFERENCES environment ON DELETE CASCADE ON UPDATE CASCADE,
 	tax_id CHAR(30) REFERENCES taxonomy ON DELETE CASCADE ON UPDATE CASCADE,
@@ -117,6 +124,7 @@ CREATE TABLE function (
 	PRIMARY KEY (tax_id, gene_name, bio_process_id, function)
 );
 
+-- FOR JEROME
 CREATE TABLE pathway_genes (
 	pathway_id INT,
 	tax_id VARCHAR,
