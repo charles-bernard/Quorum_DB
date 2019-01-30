@@ -4,6 +4,7 @@ DROP TABLE composite_gene;
 DROP TABLE environment_members;
 DROP TABLE function;
 DROP TABLE pathway_genes;
+DROP TABLE sequence;
 
 
 /* LEVEL 1 TABLES */

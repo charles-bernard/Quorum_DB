@@ -1,13 +1,13 @@
 /* LEVEL 0 TABLES */
 CREATE TABLE bio_process (
 	bio_process_id SERIAL PRIMARY KEY,
-	bio_process VARCHAR
+	bio_process VARCHAR NOT NULL
 );
 
 CREATE TABLE domain (
 	domain_id SERIAL PRIMARY KEY,
 	db_domain_id VARCHAR,
-	domain_name VARCHAR
+	domain_name VARCHAR NOT NULL
 );
 
 CREATE TABLE pathway (
@@ -27,15 +27,18 @@ CREATE TABLE taxonomy (
 	tax_id VARCHAR PRIMARY KEY,
 	ncbi_id INT,
 	taxon_name VARCHAR,
+	rank VARCHAR,
 	lineage VARCHAR,
-	ranks VARCHAR 
+	lineage_ranks VARCHAR
 );
+
 
 /* LEVEL 1 TABLES */
 CREATE TABLE bio_process_pathways (
-	bio_process_id INT REFERENCES reference ON DELETE CASCADE ON UPDATE CASCADE,
+	bio_process_id INT REFERENCES bio_process ON DELETE CASCADE ON UPDATE CASCADE,
 	pathway_id INT REFERENCES pathway ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (bio_process_id, pathway_id)
+
 );
 
 CREATE TABLE environment (
@@ -45,7 +48,6 @@ CREATE TABLE environment (
 	properties VARCHAR,
 	reference_id INT REFERENCES reference ON UPDATE CASCADE
 );
-
 
 CREATE TABLE gene (
 	tax_id VARCHAR REFERENCES taxonomy ON UPDATE CASCADE,
@@ -69,7 +71,7 @@ CREATE TABLE omics (
 
 CREATE TABLE signal (
 	signal_id SERIAL PRIMARY KEY,
-	signal_supercategory VARCHAR,
+	signal_supercategory VARCHAR NOT NULL,
 	signal_family VARCHAR,
 	signal_trivial_name VARCHAR,
 	signal_systematic_name VARCHAR,
@@ -77,6 +79,7 @@ CREATE TABLE signal (
 	reference_id INT REFERENCES reference ON UPDATE CASCADE,
 	structure_img BYTEA
 );
+
 
 /* LEVEL 2 TABLES */
 CREATE TABLE analysed_taxons (
@@ -122,3 +125,12 @@ CREATE TABLE pathway_genes (
 	PRIMARY KEY(pathway_id, tax_id, gene_name)
 );
 
+CREATE TABLE sequence (
+	tax_id INT,
+	gene_name VARCHAR,
+	seq_type VARCHAR,
+	fa_path VARCHAR NOT NULL,
+	fa_seq TEXT NOT NULL,
+	FOREIGN KEY (tax_id, gene_name) REFERENCES gene (tax_id, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY (tax_id, gene_name, seq_type)
+);
