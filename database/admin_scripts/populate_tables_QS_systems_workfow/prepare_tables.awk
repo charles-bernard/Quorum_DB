@@ -60,7 +60,7 @@ BEGIN {
 		}
 	}
 	
-	print gene_name "\t" gene_id "\t" db_gene_id "\t" gene_coordinates \
+	print ncbi_taxi_id "\t" gene_name "\t" gene_id "\t" db_gene_id "\t" gene_coordinates \
 	"\t" prot_id "\t" db_prot_id "\t" tmp_signal_id > gene_table;
 
 	if(NR == 1) {
