@@ -75,8 +75,8 @@ CREATE TABLE signal (
 	signal_id SERIAL PRIMARY KEY,
 	signal_supercategory VARCHAR NOT NULL,
 	CHECK (
-		(signal_supercategory='autoinducer_peptide') or
-		(signal_supercategory='signaling_molecule')),
+		(signal_supercategory='autoinducer peptide') or
+		(signal_supercategory='signaling molecule')),
 	signal_family VARCHAR,
 	signal_trivial_name VARCHAR,
 	signal_systematic_name VARCHAR,

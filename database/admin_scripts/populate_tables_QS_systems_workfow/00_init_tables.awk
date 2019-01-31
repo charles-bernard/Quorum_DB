@@ -37,10 +37,12 @@ BEGIN {
 	pubmed_id = $17;
 	tmp_signal_id = $18;
 
-	if(pubmed_id) {
+	if(NR == 1) {
+		print pubmed_id "\t" "doi" "\t" "isbn" > reference_table
+	} else if(pubmed_id) {
 		if(!already_pubmed[pubmed_id]) {
 			already_pubmed[pubmed_id] = 1;
-			print pubmed_id > reference_table;
+			print pubmed_id "\t\t" > reference_table;
 		}
 	}
 
@@ -87,13 +89,14 @@ BEGIN {
 
 	if(NR == 1) {
 		print ncbi_tax_id "\t" gene_name "\t" "tmp_bio_process_id" \
-		"\t" "tmp_signal_id" "\t" gene_function > function_table;
+		"\t" "tmp_signal_id" "\t" gene_function "\t" "info" \
+		"\t" "retrieval_status" > function_table;
 	} else {
 		print ncbi_tax_id "\t" gene_name "\t" tmp_bio_process_id["quorum_sensing"] \
-		"\t" tmp_signal_id "\t" gene_function > function_table;
+		"\t" tmp_signal_id "\t" gene_function "\t\t" "publi_reference" > function_table;
 		if(response_bioprocess) {
 			print ncbi_tax_id "\t" gene_name "\t" tmp_bio_process_id[response_bioprocess] \
-			"\t" tmp_signal_id "\t" gene_function > function_table;
+			"\t" tmp_signal_id "\t" gene_function "\t\t" "publi_reference" > function_table;
 		}
 	}
 }
