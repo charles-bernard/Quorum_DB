@@ -1,5 +1,5 @@
-# Once you'll have modified this block,
-# copy it as follows:
+# Once you'll have modified this template,
+# copy the resulting file as follows:
 # sudo cp webserver_quorum_db.conf /etc/apache2/sites-available/
 
 <VirtualHost *:80>
