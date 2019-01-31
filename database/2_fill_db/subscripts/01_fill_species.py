@@ -3,11 +3,13 @@
 
 from ete3 import *
 import os
+import sys
 ncbi = NCBITaxa()
 
+input_dir = sys.argv[1]
 
-input_species_table = "./input_tables/UNCOMPLETE_species.csv"
-output_species_table = "./input_tables/species.csv"
+input_species_table = os.path.join(input_dir, "UNCOMPLETE_species.csv")
+output_species_table = os.path.join(input_dir, "species.csv")
 header = "species_name\tncbi_tax_id\trank\tlineage\tlineage_ranks"
 line = list()
 with open(input_species_table, "r") as f:
@@ -34,7 +36,7 @@ with open(input_species_table, "r") as f:
             except:
                 species_name = taxon
                 ncbi_tax_id = ''
-        # Use tax id to retrieve lineage and ranks
+        # use tax id to retrieve lineage and ranks
         if ncbi_tax_id:
             lineage_list = ncbi.get_lineage(ncbi_tax_id)
             lineage_ranks_dict = ncbi.get_rank(lineage_list)
@@ -55,11 +57,12 @@ with open(input_species_table, "r") as f:
     f.close()
 
 
+# write the complete record of species attributes in the output species table
 with open(output_species_table, "w") as f:
     _ = f.write("%s\n" % header)
     for i in range(0, len(line)):
         _ = f.write("%s\n" % line[i])
     f.close()
 
-
+# remove uncomplete initial species table
 os.remove(input_species_table)

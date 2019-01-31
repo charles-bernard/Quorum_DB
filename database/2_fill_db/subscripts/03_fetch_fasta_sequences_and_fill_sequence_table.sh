@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # SETUP
-WORKING_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
+WORKING_DIR="$1";
 
 function create_dir {
 	local DIR=$1;

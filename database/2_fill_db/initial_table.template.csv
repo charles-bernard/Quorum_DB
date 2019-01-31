@@ -1,4 +1,4 @@
-signal_supercategory	signal_family	signal_trivial_name	signal_systematic_name	signal_chemical_formula	peptide_sequence	ncbi_tax_id	taxon_name	gene_name	gene_id	db_gene_id	gene_coordinates	prot_id	db_prot_id	function	response_bioprocess	pubmed_id	tmp_signal_id
+signal_supercategory	signal_family	signal_trivial_name	signal_systematic_name	signal_chemical_formula	peptide_sequence	ncbi_tax_id	taxon_name	gene_name	gene_id	db_gene_id	gene_coordinates	prot_id	db_prot_id	function	response_bioprocess	pubmed_id	signal_id
 autoinducer peptide	lantibiotic	nisin				1360	Lactobacillus lactis	nisA	HM219853.1	Nucleotide	828__1001	ADJ56352.1	Protein	synthase		15374645	1
 autoinducer peptide	lantibiotic	nisin				1360	Lactobacillus lactis	nisB	HM219853.1	Nucleotide	1109__4090	ADJ56353.1	Protein	modifier_transporter		15374645	1
 autoinducer peptide	lantibiotic	nisin				1360	Lactobacillus lactis	nisC	HM219853.1	Nucleotide	5896__7140	ADJ56355.1	Protein	modifier_transporter		15374645	1

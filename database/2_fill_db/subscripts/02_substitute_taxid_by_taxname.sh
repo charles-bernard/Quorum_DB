@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # SETUP
-WORKING_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
+WORKING_DIR="$1";
 cd "$WORKING_DIR"/"input_tables";
 
 
 INPUT_SPECIES_TABLE="species.csv";
 INPUT_GENE_TABLE="gene.csv";
 INPUT_SEQ_TABLE="UNCOMPLETE_sequence.csv";
-INPUT_FUNCTION_TABLE="UNCOMPLETE_function.csv";
+INPUT_FUNCTION_TABLE="function.csv";
 
 
 mv "$INPUT_GENE_TABLE" "$INPUT_GENE_TABLE""_old";
