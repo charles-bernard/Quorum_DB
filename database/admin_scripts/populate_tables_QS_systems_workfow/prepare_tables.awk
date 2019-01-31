@@ -11,10 +11,10 @@ BEGIN {
 	reference_table = "./input_tables/UNCOMPLETE_reference.csv";
 	sequence_table = "./input_tables/UNCOMPLETE_sequence.csv";
 
-	k = 1
+	b = 1
 	print "bioprocess_tmp_id" "\t" "bioprocess" > bioprocess_table;
-	tmp_bio_process_id["quorum_sensing"] = k;
-	print k "\t" "quorum_sensing" > bioprocess_table;
+	tmp_bio_process_id["quorum_sensing"] = b;
+	print b "\t" "quorum_sensing" > bioprocess_table;
 }
 
 {
@@ -51,6 +51,9 @@ BEGIN {
 			"\t" signal_trivial_name "\t" signal_systematic_name \
 			"\t" signal_chemical_formula "\t" peptide_sequence > signal_table;
 		}
+		if(NR == 1) {
+			print "0\t\t\t\t\t\t" > signal_table;
+		}
 	}
 
 	if(ncbi_tax_id) {
@@ -60,8 +63,8 @@ BEGIN {
 		}
 	}
 	
-	print ncbi_taxi_id "\t" gene_name "\t" gene_id "\t" db_gene_id "\t" gene_coordinates \
-	"\t" prot_id "\t" db_prot_id "\t" tmp_signal_id > gene_table;
+	print ncbi_tax_id "\t" gene_name "\t" gene_id "\t" db_gene_id \
+	"\t" gene_coordinates "\t" prot_id "\t" db_prot_id > gene_table;
 
 	if(NR == 1) {
 		print ncbi_tax_id "\t" gene_name "\t" "seq_type" > sequence_table;
@@ -76,21 +79,21 @@ BEGIN {
 
 	if(response_bioprocess && NR > 1) {
 		if(!already_filled[response_bioprocess]) {
-			k++;
-			tmp_bio_process_id[response_bioprocess] = k;
-			print k "\t" response_bioprocess > bioprocess_table;
+			b++;
+			tmp_bio_process_id[response_bioprocess] = b;
+			print b "\t" response_bioprocess > bioprocess_table;
 		}
 	}
 
 	if(NR == 1) {
 		print ncbi_tax_id "\t" gene_name "\t" "tmp_bio_process_id" \
-		"\t" gene_function > function_table;
+		"\t" "tmp_signal_id" "\t" gene_function > function_table;
 	} else {
 		print ncbi_tax_id "\t" gene_name "\t" tmp_bio_process_id["quorum_sensing"] \
-		"\t" gene_function > function_table;
+		"\t" tmp_signal_id "\t" gene_function > function_table;
 		if(response_bioprocess) {
 			print ncbi_tax_id "\t" gene_name "\t" tmp_bio_process_id[response_bioprocess] \
-			"\t" gene_function > function_table;
+			"\t" tmp_signal_id "\t" gene_function > function_table;
 		}
 	}
 }
