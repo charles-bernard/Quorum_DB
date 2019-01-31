@@ -43,7 +43,7 @@ awk -F "\t" \
 	file_index == 3 {
 		outfile = out_seq_table;
 	}
-	# gene
+	# function
 	file_index == 4 {
 		outfile = out_function_table;
 	}
