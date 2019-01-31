@@ -1,8 +1,9 @@
 /* LEVEL 2 TABLES */
 DROP TABLE analysed_taxons;
 DROP TABLE composite_gene;
-DROP TABLE environment_members;
+DROP TABLE environment_community;
 DROP TABLE function;
+DROP TABLE gene_history;
 DROP TABLE pathway_genes;
 DROP TABLE sequence;
 
@@ -18,4 +19,4 @@ DROP TABLE bio_process;
 DROP TABLE domain;
 DROP TABLE pathway;
 DROP TABLE reference;
-DROP TABLE taxonomy;
+DROP TABLE species;

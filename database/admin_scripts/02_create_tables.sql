@@ -53,17 +53,15 @@ CREATE TABLE environment (
 );
 
 CREATE TABLE gene (
-	tax_id VARCHAR REFERENCES taxonomy ON UPDATE CASCADE,
+	species_name VARCHAR REFERENCES species ON UPDATE CASCADE,
 	gene_name VARCHAR,
 	gene_id VARCHAR,
 	db_gene_id VARCHAR,
 	gene_coordinates VARCHAR,
 	prot_id VARCHAR,
 	db_prot_id VARCHAR,
-	putative_age VARCHAR,
-	horizontally_transferred BOOLEAN,
-	PRIMARY KEY (tax_id, gene_name),
-	UNIQUE (tax_id, gene_name)
+	PRIMARY KEY (species_name, gene_name),
+	UNIQUE (species_name, gene_name)
 );
 
 -- FOR JEROME
@@ -76,6 +74,9 @@ CREATE TABLE omics (
 CREATE TABLE signal (
 	signal_id SERIAL PRIMARY KEY,
 	signal_supercategory VARCHAR NOT NULL,
+	CHECK (
+		(signal_supercategory='autoinducer_peptide') or
+		(signal_supercategory='signaling_molecule')),
 	signal_family VARCHAR,
 	signal_trivial_name VARCHAR,
 	signal_systematic_name VARCHAR,
@@ -90,57 +91,76 @@ CREATE TABLE signal (
 -- FOR JEROME
 CREATE TABLE analysed_taxons (
 	dataset_id INT REFERENCES omics ON DELETE CASCADE ON UPDATE CASCADE,
-	tax_id CHAR(30) REFERENCES taxonomy ON DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY (dataset_id, tax_id)
+	species_name CHAR(30) REFERENCES species ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY (dataset_id, species_name)
 );
 
 -- FOR FUTURE ANALYSES
 CREATE TABLE composite_gene (
 	interpro_id VARCHAR,
-	tax_id VARCHAR,
+	species_name VARCHAR,
 	gene_name VARCHAR,
 	domain_order INT,
 	FOREIGN KEY (interpro_id) REFERENCES domain (interpro_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (tax_id, gene_name) REFERENCES gene (tax_id, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY(interpro_id, tax_id, gene_name)
+	FOREIGN KEY (species_name, gene_name) REFERENCES gene (species_name, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY(interpro_id, species_name, gene_name)
 );
 
 -- FOR FUTURE ANALYSES
-CREATE TABLE environment_members (
+CREATE TABLE environment_community (
 	env_id INT REFERENCES environment ON DELETE CASCADE ON UPDATE CASCADE,
-	tax_id CHAR(30) REFERENCES taxonomy ON DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY (env_id, tax_id)
+	species_name CHAR(30) REFERENCES species ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY (env_id, species_name)
 );
 
 CREATE TABLE function (
-	tax_id VARCHAR,
+	species_name VARCHAR,
 	gene_name VARCHAR,
 	bio_process_id INT,
+	signal_id INT,
 	function VARCHAR,
 	info VARCHAR,
+	retrieval_status VARCHAR CHECK (
+		(retrieval_status='publi_reference') or 
+		(retrieval_status='env_reference') or
+		(retrieval_status='publi_homolog') or
+		(retrieval_status='env_homolog')),
 	reference_id INT REFERENCES reference ON UPDATE CASCADE,
-	FOREIGN KEY (tax_id, gene_name) REFERENCES gene (tax_id, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (species_name, gene_name) REFERENCES gene (species_name, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (bio_process_id) REFERENCES bio_process (bio_process_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY (tax_id, gene_name, bio_process_id, function)
+	FOREIGN KEY (signal_id) REFERENCES signal(signal_id) ON UPDATE CASCADE,
+	PRIMARY KEY (species_name, gene_name, bio_process_id, signal_id, function)
+);
+
+CREATE TABLE gene_history (
+	species_name VARCHAR,
+	gene_name VARCHAR,
+	under_selection BOOLEAN,
+	transfered BOOLEAN,
+	composite BOOLEAN,
+	nb_dupli INT,
+	quali_putative_age VARCHAR,
+	quanti_patative_age VARCHAR,
+	FOREIGN KEY (species_name, gene_name) REFERENCES gene (species_name, gene_name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- FOR JEROME
 CREATE TABLE pathway_genes (
 	pathway_id INT,
-	tax_id VARCHAR,
+	species_name VARCHAR,
 	gene_name VARCHAR,
 	pathway_name VARCHAR,
 	FOREIGN KEY (pathway_id) REFERENCES pathway (pathway_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (tax_id, gene_name) REFERENCES gene (tax_id, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY(pathway_id, tax_id, gene_name)
+	FOREIGN KEY (species_name, gene_name) REFERENCES gene (species_name, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY(pathway_id, species_name, gene_name)
 );
 
 CREATE TABLE sequence (
-	tax_id VARCHAR,
+	species_name VARCHAR,
 	gene_name VARCHAR,
 	seq_type VARCHAR,
 	fa_path VARCHAR NOT NULL,
 	fa_seq TEXT NOT NULL,
-	FOREIGN KEY (tax_id, gene_name) REFERENCES gene (tax_id, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY (tax_id, gene_name, seq_type)
+	FOREIGN KEY (species_name, gene_name) REFERENCES gene (species_name, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY (species_name, gene_name, seq_type)
 );
