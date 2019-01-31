@@ -1,7 +1,8 @@
 /* LEVEL 0 TABLES */
 CREATE TABLE bio_process (
 	bio_process_id SERIAL PRIMARY KEY,
-	bio_process VARCHAR NOT NULL
+	bio_process VARCHAR NOT NULL,
+	UNIQUE (bio_process)
 );
 
 -- FOR FUTURE ANALYSES
@@ -40,7 +41,6 @@ CREATE TABLE bio_process_pathways (
 	bio_process_id INT REFERENCES bio_process ON DELETE CASCADE ON UPDATE CASCADE,
 	pathway_id INT REFERENCES pathway ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (bio_process_id, pathway_id)
-
 );
 
 -- FOR FUTURE ANALYSES
@@ -132,6 +132,7 @@ CREATE TABLE function (
 	PRIMARY KEY (species_name, gene_name, bio_process_id, signal_id, function)
 );
 
+-- FOR FUTURE ANALYSES
 CREATE TABLE gene_history (
 	species_name VARCHAR,
 	gene_name VARCHAR,
@@ -164,3 +165,4 @@ CREATE TABLE sequence (
 	FOREIGN KEY (species_name, gene_name) REFERENCES gene (species_name, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (species_name, gene_name, seq_type)
 );
+
