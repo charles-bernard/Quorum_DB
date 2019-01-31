@@ -3,7 +3,8 @@ Quorum_DB
 
 Toolkit to initialize, fill, update and admin the Quorum_DB
 
-Here is the wiki of the repository:
+## wiki of the repository
+
 * [wiki](https://github.com/charles-bernard/Quorum_DB/wiki)
 
 ## Prerequisites
@@ -19,6 +20,7 @@ sudo apt-get install postgresql postgresql-contrib
 ```bash
 pip install --upgrade ete3
 ```
+Open python, fetch NCBI taxonomy db
 
 ```python
 from ete3 import NCBITaxa
