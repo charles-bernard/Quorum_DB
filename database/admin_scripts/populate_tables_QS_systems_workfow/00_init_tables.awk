@@ -8,7 +8,7 @@ BEGIN {
 	species_table = "./input_tables/UNCOMPLETE_species.csv";
 	gene_table = "./input_tables/gene.csv";
 	function_table = "./input_tables/UNCOMPLETE_function.csv";
-	reference_table = "./input_tables/UNCOMPLETE_reference.csv";
+	reference_table = "./input_tables/reference.csv";
 	sequence_table = "./input_tables/UNCOMPLETE_sequence.csv";
 
 	b = 1

@@ -62,4 +62,4 @@ with open(output_species_table, "w") as f:
     f.close()
 
 
-# os.remove(input_species_table)
+os.remove(input_species_table)
