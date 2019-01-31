@@ -20,7 +20,7 @@ sudo apt-get install postgresql postgresql-contrib
 ```bash
 pip install --upgrade ete3
 ```
-Open python, fetch NCBI taxonomy db
+> Open python, fetch NCBI taxonomy db
 
 ```python
 from ete3 import NCBITaxa
