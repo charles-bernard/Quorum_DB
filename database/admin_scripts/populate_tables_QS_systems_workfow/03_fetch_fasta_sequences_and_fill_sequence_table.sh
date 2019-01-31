@@ -24,7 +24,8 @@ function check_file {
 GENE_TABLE="$WORKING_DIR"/"input_tables"/"gene.csv";
 INPUT_SEQ_TABLE="$WORKING_DIR"/"input_tables"/"UNCOMPLETE_sequence.csv";
 OUTPUT_SEQ_TABLE="$WORKING_DIR"/"input_tables"/"sequence.csv";
-check_file "$GENE_TABLE";
+awk 'NR == 1 { print $0 "\t" "fa_path"; }' "$INPUT_SEQ_TABLE" > "$OUTPUT_SEQ_TABLE";
+check_file "$GENE_TABLE"; 
 check_file "$INPUT_SEQ_TABLE";
 
 
@@ -116,21 +117,16 @@ function fill_seq {
 		-v seq_type="$SEQ_TYPE" \
 		-v seq_fasta="$SEQ_FASTA" \ '
 
-		NR == 1 {
-			header = $1 "\t" $2 "\t" $3 "\t" "fa_path";
-			print header;
-		} 
 		NR > 1 {
 			if($1 == species_name && $2 == gene_name && $3 == seq_type) {
 				print $1 "\t" $2 "\t" $3 "\t" seq_fasta "\t" fa_content;
 			}
-		}' "$INPUT_SEQ_TABLE" > "$OUTPUT_SEQ_TABLE";
+		}' "$INPUT_SEQ_TABLE" >> "$OUTPUT_SEQ_TABLE";
 }
 
 
 for(( i=0; i<$NB_GENES; i++ )); do
 	echo -ne "fetch entry n°""$((i+1))""/""$NB_GENES"": ""${GENE_NAME[$i]}"" gene" \\r
-
 
 	if [[ "${GENE_ID[$i]}" != "" ]]; then
 		fetch_seq "${CDS_FA[$i]}" "cds" "${GENE_ID[$i]}" "${DB_GENE_ID[$i]}" "${GENE_COORD[$i]}";
