@@ -3,7 +3,7 @@ Quorum_DB
 
 Toolkit to initialize, fill, update and admin the Quorum_DB
 
-## wiki of the repository
+## Wiki of the repository
 
 * [wiki](https://github.com/charles-bernard/Quorum_DB/wiki)
 
@@ -28,7 +28,7 @@ ncbi = NCBITaxa()
 ncbi.update_taxonomy_database()
 ```
 
-## NOTA BENE
+## Nota Bene
 
 Any .sql script present in this repository can be either executed via the shell:
 
