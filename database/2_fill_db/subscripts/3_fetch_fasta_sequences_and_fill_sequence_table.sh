@@ -119,7 +119,7 @@ function fill_seq {
 
 		NR > 1 {
 			if($1 == species_name && $2 == gene_name && $3 == seq_type) {
-				print $1 "\t" $2 "\t" $3 "\t" seq_fasta "\t" fa_content;
+				print $1 "\t" $2 "\t" $3 "\t" seq_fasta;
 			}
 		}' "$INPUT_SEQ_TABLE" >> "$OUTPUT_SEQ_TABLE";
 }

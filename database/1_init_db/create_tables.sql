@@ -73,7 +73,7 @@ CREATE TABLE omics (
 
 CREATE TABLE signal (
 	signal_id SERIAL PRIMARY KEY,
-	signal_supercategory VARCHAR NOT NULL,
+	signal_supercategory VARCHAR,
 	CHECK (
 		(signal_supercategory='autoinducer peptide') or
 		(signal_supercategory='signaling molecule')),
@@ -161,7 +161,7 @@ CREATE TABLE sequence (
 	gene_name VARCHAR,
 	seq_type VARCHAR,
 	fa_path VARCHAR NOT NULL,
-	fa_seq TEXT NOT NULL,
+	fa_seq TEXT,
 	FOREIGN KEY (species_name, gene_name) REFERENCES gene (species_name, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (species_name, gene_name, seq_type)
 );

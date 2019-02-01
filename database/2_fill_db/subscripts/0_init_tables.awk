@@ -6,7 +6,7 @@ BEGIN {
 	# variable <output_dir> must be sent to this script
 
 	# THE DIFFERENT OUTPUT TABLES
-	bioprocess_table = output_dir "/bioprocess.csv";
+	bioprocess_table = output_dir "/bio_process.csv";
 	function_table = output_dir "/function.csv";
 	gene_table = output_dir "/gene.csv";
 	reference_table = output_dir "/reference.csv";
@@ -16,6 +16,7 @@ BEGIN {
 	
 	b = 1;
 	bio_process_id["quorum sensing"] = b;
+	r = 0;
 }
 
 {
@@ -45,47 +46,54 @@ NR == 1 {
 	print "bio_process_id" "\t" "bio_process" > bioprocess_table
 	print ncbi_tax_id "\t" gene_name "\t" "bio_process_id" \
 		"\t" "signal_id" "\t" gene_function "\t" "info" \
-		"\t" "retrieval_status" > function_table;
+		"\t" "retrieval_status" "\t" "reference_id" > function_table;
 	print ncbi_tax_id "\t" gene_name "\t" gene_id "\t" db_gene_id \
 		"\t" gene_coordinates "\t" prot_id "\t" db_prot_id > gene_table;
-	print pubmed_id "\t" "doi" "\t" "isbn" > reference_table;
+	print "reference_id" "\t" pubmed_id "\t" "doi" "\t" "isbn" > reference_table;
 	print ncbi_tax_id "\t" gene_name "\t" "seq_type" > sequence_table;
 	print signal_id "\t" signal_supercategory "\t" signal_family \
 		"\t" signal_trivial_name "\t" signal_systematic_name \
-		"\t" signal_chemical_formula "\t" peptide_sequence > signal_table;
+		"\t" signal_chemical_formula "\t" peptide_sequence \
+		"\t" "reference_id" > signal_table;
 	print ncbi_tax_id > species_table;
 
 
 	# INIT LINES
 	print bio_process_id["quorum sensing"] "\t" "quorum sensing" > bioprocess_table
-	print "0\t\t\t\t\t\t" > signal_table;
+	print "0\t\t\t" > reference_table;
+	print "0\t\t\t\t\t\t\t0" > signal_table;
 }
 
 NR > 1 {
 	if(response_bioprocess) {
-		if(!already_filled[response_bioprocess]) {
+		if(!bio_process_id[response_bioprocess]) {
 			b++;
 			bio_process_id[response_bioprocess] = b;
 			print b "\t" response_bioprocess > bioprocess_table;
 		}
 	}
 
+	if(pubmed_id) {
+		if(!reference_id[pubmed_id]) {
+			r++;
+			reference_id[pubmed_id] = r;
+			print r "\t" pubmed_id "\t\t" > reference_table;
+		}
+	}
+
 	print ncbi_tax_id "\t" gene_name "\t" bio_process_id["quorum sensing"] \
-		"\t" signal_id "\t" gene_function "\t\t" "publi_reference" > function_table;
+		"\t" signal_id "\t" gene_function "\t\t" "publi_reference" \
+		"\t" reference_id[pubmed_id] > function_table;
 	if(response_bioprocess) {
 		print ncbi_tax_id "\t" gene_name "\t" bio_process_id[response_bioprocess] \
-			"\t" signal_id "\t" gene_function "\t\t" "publi_reference" > function_table;
+			"\t" signal_id "\t" gene_function "\t\t" "publi_reference" \
+			"\t" reference_id[pubmed_id] > function_table;
 	}
 
 	print ncbi_tax_id "\t" gene_name "\t" gene_id "\t" db_gene_id \
 		"\t" gene_coordinates "\t" prot_id "\t" db_prot_id > gene_table;
 
-	if(pubmed_id) {
-		if(!already_pubmed[pubmed_id]) {
-			already_pubmed[pubmed_id] = 1;
-			print pubmed_id "\t\t" > reference_table;
-		}
-	}
+
 
 	if(gene_id) {
 		print ncbi_tax_id "\t" gene_name "\t" "cds" > sequence_table;
@@ -99,7 +107,8 @@ NR > 1 {
 			already_signal[signal_id] = 1;
 			print signal_id "\t" signal_supercategory "\t" signal_family \
 			"\t" signal_trivial_name "\t" signal_systematic_name \
-			"\t" signal_chemical_formula "\t" peptide_sequence > signal_table;
+			"\t" signal_chemical_formula "\t" peptide_sequence \
+			"\t" reference_id[pubmed_id] > signal_table;
 		}
 	}
 
