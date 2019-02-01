@@ -1,4 +1,9 @@
 sudo -i -u postgres
+
+# backup
 pg_dump quorum_db > quorum_db.bak
+
+# restore
+psql quorum_db < quorum_db.bak
 
 
