@@ -1,18 +1,17 @@
 #!/bin/bash
 
-echo 'Type in database name';
-read -p"-> " db_name;
-
-echo 'Type in user name';
-read -p"-> " username;
+DB_NAME="$1";
+USER_NAME="$2";
 
 # STEP 1
 # RETRIEVE FA_PATH WHOSE CONTENT HAS TO BE INSERTED
 WORK_DIR=`mktemp -d`
 PSQL_OUT=$(mktemp "$WORK_DIR"/"XXXX");
-psql -U $username -d $db_name \
+psql -U $USER_NAME -d $DB_NAME \
 	-c 'SELECT fa_path FROM sequence WHERE fa_seq IS NULL;' > "$PSQL_OUT";
 
+# STEP 2
+# INSERT CONTENT OF EACH FASTA INTO APPROPRIATE COLUMN
 LIST_FA=$(mktemp "$WORK_DIR"/"XXXX");
 egrep '^.*\.fa(a)?(sta)?$' "$PSQL_OUT" | sed 's/ //g' > "$LIST_FA";
 rm "$PSQL_OUT";
@@ -23,5 +22,6 @@ for(( i=0; i<$N; i++ )); do
 	COMMAND_SQL1="\set content \`cat "$CURR_FA"\`;";
 	COMMAND_SQL2="UPDATE sequence SET fa_seq = :'content' WHERE sequence.fa_path = '"$CURR_FA"';";
 	COMMAND_SQL="$COMMAND_SQL1"" \n ""$COMMAND_SQL2";
-	printf "$COMMAND_SQL" | psql -U $username -d $db_name
+	printf "$COMMAND_SQL" | psql -U $USER_NAME -d $DB_NAME;
 done
+rm "$LIST_FA";

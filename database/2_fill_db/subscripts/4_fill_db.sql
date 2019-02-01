@@ -1,5 +1,4 @@
 -- MUST WRITE THE DATABASE DIRECTORY
-\set dir /home/disque1/aire_db/Quorum_DB/database
 \cd :dir
 
 /* LEVEL O TABLES */
