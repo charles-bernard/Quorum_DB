@@ -27,3 +27,17 @@ from ete3 import NCBITaxa
 ncbi = NCBITaxa()
 ncbi.update_taxonomy_database()
 ```
+
+## NOTA BENE
+
+Any .sql script present in this repository can be either executed via the shell:
+
+```bash
+psql -U <username> -d <dbname> -f <path_to_sql_script>
+```
+
+or within a psql session:
+
+```SQL
+\i <path_to_sql_script>
+```
