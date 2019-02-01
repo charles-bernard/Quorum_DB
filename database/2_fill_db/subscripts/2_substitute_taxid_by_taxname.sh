@@ -2,7 +2,7 @@
 
 # SETUP
 WORKING_DIR="$1";
-cd "$WORKING_DIR"/"input_tables";
+cd "$WORKING_DIR";
 
 
 INPUT_SPECIES_TABLE="species.csv";
