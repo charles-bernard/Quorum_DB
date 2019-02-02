@@ -52,6 +52,15 @@ function fetch_seq {
 	local SEQ_ID="$3";
 	local SEQ_DB="$4";
 	local SEQ_COORD="$5";
+	
+	# TO DO: If SEQ_COORD exist, declare assembly_id = gene_id and 
+	# create a dictionary whose key is assembly_id
+	# and associated value is "1".
+	# Whenever dict[assembly_id] is "", download the assembly into
+	# a dedicated directory, else use the pre-downloaded assembly
+	# to extract the portion of it that corresponds to the cds
+	
+	# TO DO: enable downloading protein from uniprot
 
 	if [ ! -f "$SEQ_FASTA" ]; then
 
