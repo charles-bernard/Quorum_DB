@@ -55,10 +55,18 @@ function fetch_seq {
 	
 	# TO DO: If SEQ_COORD exist, declare assembly_id = gene_id and 
 	# create a dictionary whose key is assembly_id
-	# and associated value is "1".
-	# Whenever dict[assembly_id] is "", download the assembly into
+	# and associated value is 1.
+	# Whenever dict[assembly_id] is not 1, download the assembly into
 	# a dedicated directory, else use the pre-downloaded assembly
 	# to extract the portion of it that corresponds to the cds
+	
+	# TO DO: Handle the case where cds is on reverse
+	# strand (Key letter "c" for complement)
+	
+	# TO DO: Handle the case where cds is a concatenation
+	# of several regions (Key letter "j" for join)
+	# regions to be concanated together are separated with
+	# "++" string
 	
 	# TO DO: enable downloading protein from uniprot
 
