@@ -195,4 +195,4 @@ done
 
 rm "$INPUT_SEQ_TABLE";
 rm "$FETCH_STDERR";
-# rm -r "$ASSEMBLY_DIR";
+rm -r "$ASSEMBLY_DIR";
