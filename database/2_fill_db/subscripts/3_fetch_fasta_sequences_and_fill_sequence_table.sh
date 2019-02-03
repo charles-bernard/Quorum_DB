@@ -64,17 +64,6 @@ function fetch_seq {
 	local DOWNLOAD_ASSEMBLY="$8";
 	> "$STDERR";
 	
-	
-	# TO DO: If SEQ_COORD exist, declare assembly_id = gene_id and 
-	# create a dictionary whose key is assembly_id
-	# and associated value is 1.
-	# Whenever dict[assembly_id] is not 1, download the assembly into
-	# a dedicated directory, else use the pre-downloaded assembly
-	# to extract the portion of it that corresponds to the cds
-	
-	# TO DO: Handle the case where cds is on reverse
-	# strand (Key letter "c" for complement)
-	
 	# TO DO: Handle the case where cds is a concatenation
 	# of several regions (Key letter "j" for join)
 	# regions to be concanated together are separated with
@@ -82,8 +71,6 @@ function fetch_seq {
 	
 	# TO DO: enable downloading protein from uniprot
 
-	# TO DO: handle error when not managed to download a sequence
-	# i.e -> do not create fasta file and do not write fa_path
 
 	if [ ! -f "$SEQ_FASTA" ]; then
 
