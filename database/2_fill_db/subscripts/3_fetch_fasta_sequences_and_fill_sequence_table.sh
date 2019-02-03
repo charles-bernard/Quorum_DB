@@ -110,28 +110,7 @@ function fetch_seq {
 						return;
 					fi			
 
-					ACTION_LETTER=`echo "$SEQ_COORD" | awk -F "-" '{ print $1; }'`;
-					POSITIONS=`echo "$SEQ_COORD" | awk -F "-" '{ print $2; }'`;
-					START=`echo "$POSITIONS" | awk -F "_" '{ print $1; }'`;
-					END=`echo "$POSITIONS" | awk -F "_" '{ print $2; }'`;
-
-					awk -v start=$START -v end=$END '
-						BEGIN { l = 70; }
-
-						# print header
-						NR == 1 { print $0 " (" start "-" end ")"; }
-
-						# concatenate genome or whatsoever sequence
-						NR > 1 { s = s $0; }
-
-						# substr portion of interest and print it as fasta
-						END { 
-							seq = substr(s, start, end-start+1);
-							for(k = 1; k < end-start+1; k += l) {
-								print substr(seq, k, l);
-							}
-						}
-					' "$ASSEMBLY_FASTA" > "$SEQ_FASTA";
+					awk -v coord="$SEQ_COORD" -f "subscripts/3_substr_assembly.awk" "$ASSEMBLY_FASTA" > "$SEQ_FASTA";
 
 				else
 
@@ -216,4 +195,4 @@ done
 
 rm "$INPUT_SEQ_TABLE";
 rm "$FETCH_STDERR";
-rm -r "$ASSEMBLY_DIR";
+# rm -r "$ASSEMBLY_DIR";
