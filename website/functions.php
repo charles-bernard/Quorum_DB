@@ -1,5 +1,7 @@
 <?php
 	function print_table($query_result) {
+		echo('<table border=1 frame=void rules=all>');
+
 		$n_fields = pg_num_fields($query_result);
 
 		// TABLE HEADER
@@ -19,10 +21,14 @@
 				echo('<tr bgcolor="WhiteSmoke">');
 			}
 			for($i=0;$i<$n_fields;$i++) {
-				echo('<td>' . $record[$i] . '&nbsp;&nbsp;' . '</td>');
+				echo('<td>' . '<font face="">');
+				echo($record[$i] . '&nbsp;&nbsp;');
+				echo('</font>' . '</td>');
 			}
 			echo('</tr>');
 			++$k;
 		}
+
+		echo('</table');
   }
 ?>
