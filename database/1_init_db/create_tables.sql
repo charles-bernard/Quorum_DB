@@ -82,8 +82,8 @@ CREATE TABLE signal (
 	signal_systematic_name VARCHAR,
 	signal_chemical_formula VARCHAR,
 	peptide_sequence VARCHAR,
-	reference_id INT REFERENCES reference ON UPDATE CASCADE,
-	structure_img BYTEA
+	structure_img BYTEA,
+	signal_info TEXT
 );
 
 
@@ -129,7 +129,7 @@ CREATE TABLE function (
 	FOREIGN KEY (species_name, gene_name) REFERENCES gene (species_name, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (bio_process_id) REFERENCES bio_process (bio_process_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (signal_id) REFERENCES signal(signal_id) ON UPDATE CASCADE,
-	PRIMARY KEY (species_name, gene_name, bio_process_id, signal_id, function)
+	PRIMARY KEY (species_name, gene_name, bio_process_id, signal_id, function, retrieval_status, reference_id)
 );
 
 -- FOR FUTURE ANALYSES

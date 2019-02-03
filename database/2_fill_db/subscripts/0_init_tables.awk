@@ -39,6 +39,7 @@ BEGIN {
 	response_bioprocess = $16;
 	pubmed_id = $17;
 	signal_id = $18;
+	signal_info = $19;
 }
 
 NR == 1 {
@@ -54,46 +55,59 @@ NR == 1 {
 	print signal_id "\t" signal_supercategory "\t" signal_family \
 		"\t" signal_trivial_name "\t" signal_systematic_name \
 		"\t" signal_chemical_formula "\t" peptide_sequence \
-		"\t" "reference_id" > signal_table;
+		"\t" signal_info > signal_table;
 	print ncbi_tax_id > species_table;
 
 
 	# INIT LINES
 	print bio_process_id["quorum sensing"] "\t" "quorum sensing" > bioprocess_table
 	print "0\t\t\t" > reference_table;
-	print "0\t\t\t\t\t\t\t0" > signal_table;
+	print "0\t\t\t\t\t\t\t" > signal_table;
 }
 
 NR > 1 {
 	if(response_bioprocess) {
-		if(!bio_process_id[response_bioprocess]) {
-			b++;
-			bio_process_id[response_bioprocess] = b;
-			print b "\t" response_bioprocess > bioprocess_table;
+		split(response_bioprocess, response_bioprocesses, "|");
+		for(i = 1; i <= length(response_bioprocesses); i++) {
+			if(!bio_process_id[response_bioprocesses[i]]) {
+				b++;
+				bio_process_id[response_bioprocesses[i]] = b;
+				print b "\t" response_bioprocesses[i] > bioprocess_table;
+			}
 		}
+	} else {
+		response_bioprocesses[1] = "";
 	}
 
 	if(pubmed_id) {
-		if(!reference_id[pubmed_id]) {
-			r++;
-			reference_id[pubmed_id] = r;
-			print r "\t" pubmed_id "\t\t" > reference_table;
+		split(pubmed_id, pubmed_ids, "|");
+		for(i = 1; i <= length(pubmed_ids); i++) {
+			if(!reference_id[pubmed_ids[i]]) {
+				r++;
+				reference_id[pubmed_ids[i]] = r;
+				print r "\t" pubmed_ids[i] "\t\t" > reference_table;
+			}
 		}
+	} else {
+		pubmed_ids[1] = "0";
+		reference_id[pubmed_ids[1]] = "0";
 	}
 
-	print ncbi_tax_id "\t" gene_name "\t" bio_process_id["quorum sensing"] \
-		"\t" signal_id "\t" gene_function "\t\t" "publi_reference" \
-		"\t" reference_id[pubmed_id] > function_table;
-	if(response_bioprocess) {
-		print ncbi_tax_id "\t" gene_name "\t" bio_process_id[response_bioprocess] \
+	for(i = 1; i <= length(pubmed_ids); i++) {
+		print ncbi_tax_id "\t" gene_name "\t" bio_process_id["quorum sensing"] \
 			"\t" signal_id "\t" gene_function "\t\t" "publi_reference" \
-			"\t" reference_id[pubmed_id] > function_table;
+			"\t" reference_id[pubmed_ids[i]] > function_table;
+		if(response_bioprocess) {
+			for(j = 1; j <= length(response_bioprocesses); j++) {
+				print ncbi_tax_id "\t" gene_name "\t" bio_process_id[response_bioprocesses[j]] \
+					"\t" signal_id "\t" gene_function "\t\t" "publi_reference" \
+					"\t" reference_id[pubmed_ids[i]] > function_table;
+			}
+		}
 	}
 
 	print ncbi_tax_id "\t" gene_name "\t" gene_id "\t" db_gene_id \
 		"\t" gene_coordinates "\t" prot_id "\t" db_prot_id > gene_table;
-
-
 
 	if(gene_id) {
 		print ncbi_tax_id "\t" gene_name "\t" "cds" > sequence_table;
@@ -108,7 +122,7 @@ NR > 1 {
 			print signal_id "\t" signal_supercategory "\t" signal_family \
 			"\t" signal_trivial_name "\t" signal_systematic_name \
 			"\t" signal_chemical_formula "\t" peptide_sequence \
-			"\t" reference_id[pubmed_id] > signal_table;
+			"\t" signal_info > signal_table;
 		}
 	}
 
