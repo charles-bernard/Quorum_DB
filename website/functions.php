@@ -22,7 +22,7 @@
 			}
 			for($i=0;$i<$n_fields;$i++) {
 				echo('<td>' . '<font face="">');
-				echo($record[$i] . '&nbsp;&nbsp;');
+				echo(nl2br($record[$i] . '&nbsp;&nbsp;'));
 				echo('</font>' . '</td>');
 			}
 			echo('</tr>');

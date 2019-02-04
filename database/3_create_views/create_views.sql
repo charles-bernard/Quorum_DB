@@ -19,7 +19,7 @@ CREATE VIEW qs_summary AS
 			function.species_name,
 			signal.signal_supercategory,
 			signal.signal_family,
-			signal.signal_trivial_name,
+			-- signal.signal_trivial_name,
 			string_agg(function.gene_name, E'\n') AS "genes",
 			string_agg(function.function, E'\n') AS "functions",
 			response.response
@@ -40,14 +40,16 @@ CREATE VIEW qs_summary AS
 			function.signal_id,
 			response.response,
 			signal.signal_supercategory,
-			signal.signal_family,
-			signal.signal_trivial_name)
+			signal.signal_family)
+			-- signal.signal_trivial_name)
 	SELECT 
 		*
 	FROM qs_unsorted_summary
 	ORDER BY
 		superkingdom, 
-		phylum, 
+		phylum,
+		signal_supercategory,
+		signal_family, 
 		species_name;
 
 
