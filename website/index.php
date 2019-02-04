@@ -44,7 +44,7 @@
 				exit;
 			}
 
-			$result = pg_query($dbconn, 'select * from sequence');
+			$result = pg_query($dbconn, 'select * from qs_summary');
 			print_table($result);
 			pg_free_result($result);
 
