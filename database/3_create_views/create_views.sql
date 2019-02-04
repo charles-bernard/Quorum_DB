@@ -28,7 +28,7 @@ CREATE VIEW qs_summary AS
 				ON function.signal_id = response.signal_id
 			LEFT JOIN species
 				ON function.species_name = species.species_name
-			LEFT JOIN signal
+			RIGHT JOIN signal
 				ON function.signal_id = signal.signal_id
 		WHERE 
 			function.signal_id != 0 AND 
