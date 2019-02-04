@@ -13,7 +13,7 @@ autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	CSF (Competence Stimulating F
 autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	CSF (Competence Stimulating Factor)				1423	Bacillus subtilis	spoOK						modifier_transporter	competence|production of surfactin	20502894	4	
 autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	CSF (Competence Stimulating Factor)				1423	Bacillus subtilis	rapC	AY664811.1	Nucleotide	N-135_1283	AAT75294.1	Protein	receptor	competence|production of surfactin	20502894	4	
 autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	CSF (Competence Stimulating Factor)				1423	Bacillus subtilis	comA	KT750872.1	Nucleotide		AML23201.1	Protein	response_regulator	competence|production of surfactin	20502894	4	
-autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	cCF10			LVTLVFV	1351	Enteroccocus faecalis	ccfA	AE016830.1	Nucleotide	C-3216046_3216873	AAO82996.1	Protein	synthase		20502894	5	
+autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	cCF10			LVTLVFV	1351	Enteroccocus faecalis	ccfA	AE016830.1	Nucleotide	C-3216873_3216046	AAO82996.1	Protein	synthase		20502894	5	
 autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	cCF10			LVTLVFV	1351	Enteroccocus faecalis	prgX	AY855841.2	Nucleotide	C-7983_7030	AAA65845.1	Protein	receptor		20502894	5	
 autoinducer peptide	viral autoinducer peptide	arbitrium			SAIRGA	10736	Bacillus phage phi3T	aimP	KY030782.1	Nucleotide	N-70050_70181	APD21233.1	Protein	synthase	lysogeny	28099413	6	
 autoinducer peptide	viral autoinducer peptide	arbitrium			SAIRGA	10736	Bacillus phage phi3T	aimR	KY030782.1	Nucleotide	N-68883_70019	APD21232.1	Protein	receptor	lysogeny	28099413	6	
