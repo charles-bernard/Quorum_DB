@@ -55,14 +55,16 @@ NR == 1 {
 	print signal_id "\t" signal_supercategory "\t" signal_family \
 		"\t" signal_trivial_name "\t" signal_systematic_name \
 		"\t" signal_chemical_formula "\t" peptide_sequence \
-		"\t" signal_info > signal_table;
+		"\t" signal_info "\t" "qs_system" > signal_table;
 	print ncbi_tax_id > species_table;
 
 
 	# INIT LINES
 	print bio_process_id["quorum sensing"] "\t" "quorum sensing" > bioprocess_table
 	print "0\t\t\t" > reference_table;
-	print "0\t\t\t\t\t\t\t" > signal_table;
+	print "0\t\t\t\t\t\t\t\t" > signal_table;
+
+	n_signal = 0;
 }
 
 NR > 1 {
@@ -106,24 +108,43 @@ NR > 1 {
 		}
 	}
 
-	print ncbi_tax_id "\t" gene_name "\t" gene_id "\t" db_gene_id \
-		"\t" gene_coordinates "\t" prot_id "\t" db_prot_id > gene_table;
+	gene_key = ncbi_tax_id " " gene_name;
+	if(! visited[gene_key]) {
+		print ncbi_tax_id "\t" gene_name "\t" gene_id "\t" db_gene_id \
+			"\t" gene_coordinates "\t" prot_id "\t" db_prot_id > gene_table;
 
-	if(gene_id) {
-		print ncbi_tax_id "\t" gene_name "\t" "cds" > sequence_table;
+		if(gene_id) {
+			print ncbi_tax_id "\t" gene_name "\t" "cds" > sequence_table;
+		}
+		if(prot_id) {
+			print ncbi_tax_id "\t" gene_name "\t" "protein" > sequence_table;
+		}
+		visited[gene_key] = 1;
 	}
-	if(prot_id) {
-		print ncbi_tax_id "\t" gene_name "\t" "protein" > sequence_table;
-	}
+
 
 	if(signal_id) {
-		if(!already_signal[signal_id]) {
-			already_signal[signal_id] = 1;
-			print signal_id "\t" signal_supercategory "\t" signal_family \
-			"\t" signal_trivial_name "\t" signal_systematic_name \
-			"\t" signal_chemical_formula "\t" peptide_sequence \
-			"\t" signal_info > signal_table;
+		if(!already_visited[signal_id]) {
+			already_visited[signal_id] = 1;
+			list_signal_ids[n_signal] = signal_id;
+
+			synthase[signal_id] = "?";
+			receptor[signal_id] = "?";
+
+			preline_signal[signal_id] = signal_id "\t" signal_supercategory \
+			"\t" signal_family "\t" signal_trivial_name \
+			"\t" signal_systematic_name "\t" signal_chemical_formula \
+			"\t" peptide_sequence "\t" signal_info
+
+			n_signal++;
 		}
+
+		if(gene_function == "synthase") {
+			synthase[signal_id] = gene_name;
+		} else if(gene_function == "receptor") {
+			receptor[signal_id] = gene_name;
+		}
+
 	}
 
 	if(ncbi_tax_id) {
@@ -131,5 +152,13 @@ NR > 1 {
 			already_tax[ncbi_tax_id] = 1;
 			print ncbi_tax_id > species_table;
 		}
+	}
+}
+
+END {
+	for(i = 0; i < n_signal; i++) {
+		curr_signal_id = list_signal_ids[i];
+		line = preline_signal[curr_signal_id] "\t" synthase[curr_signal_id] " / " receptor[curr_signal_id];
+		print line > signal_table
 	}
 }

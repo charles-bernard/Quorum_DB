@@ -13,6 +13,26 @@ autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	CSF (Competence Stimulating F
 autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	CSF (Competence Stimulating Factor)				1423	Bacillus subtilis	spoOK						modifier_transporter	competence|production of surfactin	20502894	4	
 autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	CSF (Competence Stimulating Factor)				1423	Bacillus subtilis	rapC	AY664811.1	Nucleotide	N-135_1283	AAT75294.1	Protein	receptor	competence|production of surfactin	20502894	4	
 autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	CSF (Competence Stimulating Factor)				1423	Bacillus subtilis	comA	KT750872.1	Nucleotide		AML23201.1	Protein	response_regulator	competence|production of surfactin	20502894	4	
-autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	cCF10			LVTLVFV	1351	Enteroccocus faecalis	ccfA	AE016830.1	Nucleotide	N-3216046_3216873	AAO82996.1	Protein	synthase		20502894	5	
+autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	cCF10			LVTLVFV	1351	Enteroccocus faecalis	ccfA	AE016830.1	Nucleotide	C-3216046_3216873	AAO82996.1	Protein	synthase		20502894	5	
 autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	cCF10			LVTLVFV	1351	Enteroccocus faecalis	prgX	AY855841.2	Nucleotide	C-7983_7030	AAA65845.1	Protein	receptor		20502894	5	
-autoinducer peptide	arbitrium 	arbitrium			SAIRGA	10736	Bacillus phage phi3T	aimP	KY030782.1	Nucleotide	N-70050_70181	APD21233.1	Protein	synthase	lysogeny		6	
+autoinducer peptide	viral autoinducer peptide	arbitrium			SAIRGA	10736	Bacillus phage phi3T	aimP	KY030782.1	Nucleotide	N-70050_70181	APD21233.1	Protein	synthase	lysogeny	28099413	6	
+autoinducer peptide	viral autoinducer peptide	arbitrium			SAIRGA	10736	Bacillus phage phi3T	aimR	KY030782.1	Nucleotide	N-68883_70019	APD21232.1	Protein	receptor	lysogeny	28099413	6	
+autoinducer peptide	viral autoinducer peptide	arbitrium			SAIRGA	10736	Bacillus phage phi3T	aimX	KY030782.1	Nucleotide	N-70314_70469	APD21234.1	Protein	response_regulator	lysogeny	28099413	6	
+autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	iCF10			AITLIFI	1351	Enteroccocus faecalis	prgQ	AY855841.2	Nucleotide	N-8192_8263	AAA65846.1	Protein	synthase	competence inhibition	20502894	7	
+autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)	iCF10			AITLIFI	1351	Enteroccocus faecalis	prgX	AY855841.2	Nucleotide	C-7983_7030	AAA65845.1	Protein	receptor	competence inhibition	20502894	7	
+autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)				LPFEP	1428	Bacillus thuringiensis	papR	NC_005957.1	Nucleotide	N-5086879-5087025	YP_039342.1	Protein	synthase	food supply|cell protection|signals integration	20502894	8	
+autoinducer peptide	RNPP (Rap-Npr-PlcR-PrgX genes)				LPFEP	1428	Bacillus thuringiensis	plcR	AY224733.1	Nucleotide	C-400_1	AAP92471.1	Protein	receptor	food supply|cell protection|signals integration	20502894	8	
+autoinducer peptide	lantibiotic	subtilin				1423	Bacillus subtilis	spaS	U09819.1	Nucleotide	N-6795_6965	AAB91589.1	Protein	synthase	production of subtilin	15374645	9	
+autoinducer peptide	lantibiotic	subtilin				1423	Bacillus subtilis	spaB	U09819.1	Nucleotide	N-495_3587	AAB91586.1	Protein	modifier_transporter	production of subtilin	15374645	9	
+autoinducer peptide	lantibiotic	subtilin				1423	Bacillus subtilis	spaC	U09819.1	Nucleotide	N-5395_6720	AAB91588.1	Protein	modifier_transporter	production of subtilin	15374645	9	
+autoinducer peptide	lantibiotic	subtilin				1423	Bacillus subtilis	spaK	U09819.1	Nucleotide	N-10970_12349	AAB91593.1	Protein	receptor	production of subtilin	15374645	9	
+autoinducer peptide	lantibiotic	subtilin				1423	Bacillus subtilis	spaR	U09819.1	Nucleotide	N-10317_10979	AAB91594.1	Protein	response_regulator	production of subtilin	15374645	9	
+autoinducer peptide	eukaryotic autoinducer peptide	QSP1 (Quorum Sensing-like Peptide 1)			NFGAPGGAYPW	5207	Cryptococcus neoformans	qsp1	NC_026745.1	Nucleotide	N-411635_415418	XP_012048278.1	Protein	synthase	virulence	27212659	10	
+autoinducer peptide	eukaryotic autoinducer peptide	QSP1 (Quorum Sensing-like Peptide 1)			NFGAPGGAYPW	5207	Cryptococcus neoformans	pqp1	NC_026747.1	Nucleotide	C-215548_214551	XP_012046191.1	Protein	modifier_transporter	virulence	27212659	10	
+autoinducer peptide	eukaryotic autoinducer peptide	QSP1 (Quorum Sensing-like Peptide 1)			NFGAPGGAYPW	5207	Cryptococcus neoformans	opt1	NC_026747.1	Nucleotide	N-209211_213995	XP_012047806.1	Protein	modifier_transporter	virulence	27212659	10	
+autoinducer peptide	eukaryotic autoinducer peptide	QSP1 (Quorum Sensing-like Peptide 1)			NFGAPGGAYPW	5207	Cryptococcus neoformans	liv3	NC_026751.1	Nucleotide	C-1001905_999255	XP_012050568.1	Protein	response_regulator	virulence	27212659	10	
+signaling molecule	DPO (Dimethyl_Pyrazin_Ol)	DPO	3,5-dimethylpyrazin-2-ol			666	Vibrio cholerae	tdh	NC_002506.1	Nucleotide	C-838923_837892	NP_233271.1	Protein	synthase	biofilm inhibition|virulence inhibition	28319101	11	
+signaling molecule	DPO (Dimethyl_Pyrazin_Ol)	DPO	3,5-dimethylpyrazin-2-ol			666	Vibrio cholerae	vqmA	NC_002506.1	Nucleotide	N-1031679_1032419	NP_233459.2	Protein	receptor	biofilm inhibition|virulence inhibition	28319101	11	
+signaling molecule	DPO (Dimethyl_Pyrazin_Ol)	DPO	3,5-dimethylpyrazin-2-ol			666	Vibrio cholerae	vqmR	CP001236.1	Nucleotide	N-419685_419805			response_regulator	biofilm inhibition|virulence inhibition	28319101	11	
+signaling molecule	DPO (Dimethyl_Pyrazin_Ol)	DPO	3,5-dimethylpyrazin-2-ol			261726	Vibrio virus VP882	vqmA_phage	NC_009016.1	Nucleotide	N-28328_29035	YP_001039867.1	Protein	receptor	lysis		12	
+signaling molecule	DPO (Dimethyl_Pyrazin_Ol)	DPO	3,5-dimethylpyrazin-2-ol			261726	Vibrio virus VP882	qtip	NC_009016.1	Nucleotide	C-28219_27980	YP_001039866.1	Protein	response_regulator	lysis		12	

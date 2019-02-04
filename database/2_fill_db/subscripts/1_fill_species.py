@@ -10,7 +10,7 @@ input_dir = sys.argv[1]
 
 input_species_table = os.path.join(input_dir, "UNCOMPLETE_species.csv")
 output_species_table = os.path.join(input_dir, "species.csv")
-header = "species_name\tncbi_tax_id\trank\tlineage\tlineage_ranks"
+header = "species_name\tncbi_tax_id\tsuperkingdom\tphylum\tclass\torder\tfull_lineage\tfull_lineage_ranks"
 line = list()
 with open(input_species_table, "r") as f:
     next(f)
@@ -36,24 +36,30 @@ with open(input_species_table, "r") as f:
             except:
                 species_name = taxon
                 ncbi_tax_id = ''
+        superkingdom = phylum = class_ = order = lineage = lineage_ranks = ''
         # use tax id to retrieve lineage and ranks
         if ncbi_tax_id:
             lineage_list = ncbi.get_lineage(ncbi_tax_id)
             lineage_ranks_dict = ncbi.get_rank(lineage_list)
             lineage = list(ncbi.get_taxid_translator([lineage_list[0]]).values())[0]
             lineage_ranks = lineage_ranks_dict[lineage_list[0]]
+
             for i in range(1, len(lineage_list)):
                 curr_taxid = lineage_list[i]
                 curr_name = list(ncbi.get_taxid_translator([curr_taxid]).values())[0]
                 curr_rank = lineage_ranks_dict[curr_taxid]
-                lineage = lineage + "; " + curr_name
+                lineage = lineage + '; ' + curr_name
                 lineage_ranks = lineage_ranks + "; " + curr_rank
-            rank = curr_rank
-        else:
-            lineage = ''
-            lineage_ranks = ''
-            rank = ''
-        line.append(species_name + "\t" + ncbi_tax_id + "\t" + rank + "\t" + lineage + "\t" + lineage_ranks)
+                if curr_rank == 'superkingdom':
+                    superkingdom = curr_name
+                elif curr_rank == 'phylum':
+                    phylum = curr_name
+                elif curr_rank == 'class':
+                    class_ = curr_name
+                elif curr_rank == 'order':
+                    order = curr_name
+        line.append(species_name + "\t" + ncbi_tax_id + "\t" + superkingdom + "\t" + phylum
+                    + "\t" + class_ + "\t" + order + "\t" + lineage + "\t" + lineage_ranks)
     f.close()
 
 

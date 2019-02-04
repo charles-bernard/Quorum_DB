@@ -29,9 +29,12 @@ CREATE TABLE reference (
 CREATE TABLE species (
 	species_name VARCHAR PRIMARY KEY,
 	ncbi_tax_id INT,
-	rank VARCHAR,
-	lineage VARCHAR,
-	lineage_ranks VARCHAR
+	superkingdom VARCHAR,
+	phylum VARCHAR,
+	class VARCHAR,
+	order_ VARCHAR,
+	full_lineage VARCHAR,
+	full_lineage_ranks VARCHAR
 );
 
 
@@ -83,7 +86,8 @@ CREATE TABLE signal (
 	signal_chemical_formula VARCHAR,
 	peptide_sequence VARCHAR,
 	structure_img BYTEA,
-	signal_info TEXT
+	signal_info TEXT,
+	qs_system VARCHAR
 );
 
 

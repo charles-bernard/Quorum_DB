@@ -85,14 +85,18 @@ function fetch_seq {
 						| efetch -format fasta > "$ASSEMBLY_FASTA" 2>>"$STDERR";
 
 						if [ -s "$STDERR" ]; then
-							echo "   * Unable to fetch the sequence (check internet connexion or ""$SEQ_TYPE"" id)";
+							echo "   * Unable to fetch the assembly ""$SEQ_ID"" from ""$SEQ_DB";
+							echo "     (please check internet connexion)";
 							rm "$ASSEMBLY_FASTA";
 							return;
-						fi	
-					fi
-
-					if [ ! -f "$ASSEMBLY_FASTA" ]; then
-						echo "   * Unable to fetch the sequence (check internet connexion or ""$SEQ_TYPE"" id)";
+						elif [ ! -s "$ASSEMBLY_FASTA" ]; then
+							echo "   * Unable to fetch the assembly ""$SEQ_ID"" from ""$SEQ_DB";
+							echo "     (please check validity of this id)";
+							rm "$ASSEMBLY_FASTA";
+							return;
+						fi
+					elif [ ! -f "$ASSEMBLY_FASTA" ]; then
+						echo "   * Unable to find the assembly (please check why it has not been fetched from previous messages)";
 						echo "Assembly Not Available!" >> "$STDERR";
 						return;
 					fi			
@@ -119,10 +123,17 @@ function fetch_seq {
 		fi
 
 		if [ -s "$STDERR" ]; then
-			echo "   * Unable to fetch the sequence (check internet connexion or ""$SEQ_TYPE"" id)";
+			echo "   * Unable to fetch the sequence ""$SEQ_ID"" ""$SEQ_COORD"" from ""$SEQ_DB";
+			echo "     (check internet connexion)";
 			rm "$SEQ_FASTA";
-			return
+			return;
+		elif [ ! -s "$SEQ_FASTA" ]; then
+			echo "   * Unable to fetch the sequence ""$SEQ_ID"" ""$SEQ_COORD"" from ""$SEQ_DB";
+			echo "     (please check validity of the id)";
+			rm "$SEQ_FASTA";
+			return;
 		fi
+
 	fi
 }
 
