@@ -1,7 +1,7 @@
 Quorum_DB  
 ==============================
 
-Toolkit to initialize, fill, update and admin the Quorum_DB
+Toolkit to initialize, fill, query and admin the Quorum_DB
 
 ## Wiki of the repository
 
