@@ -1,3 +1,6 @@
+/* VIEWS */
+DROP VIEW qs_summary;
+
 /* LEVEL 2 TABLES */
 DROP TABLE analysed_taxons;
 DROP TABLE composite_gene;
