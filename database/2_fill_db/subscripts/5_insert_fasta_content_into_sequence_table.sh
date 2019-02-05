@@ -19,7 +19,7 @@ rm "$PSQL_OUT";
 N=`awk 'END { print NR; }' "$LIST_FA"`;
 for(( i=0; i<$N; i++ )); do
 	CURR_FA=`awk -v i=$((i+1)) 'NR == i { print $0; }' "$LIST_FA"`
-	COMMAND_SQL1="\set content \`cat "$CURR_FA"\`;";
+	COMMAND_SQL1="\set content \`cat "$CURR_FA"\`";
 	COMMAND_SQL2="UPDATE sequence SET fa_seq = :'content' WHERE sequence.fa_path = '"$CURR_FA"';";
 	COMMAND_SQL="$COMMAND_SQL1"" \n ""$COMMAND_SQL2";
 	printf "$COMMAND_SQL" | psql -U $USER_NAME -d $DB_NAME;
