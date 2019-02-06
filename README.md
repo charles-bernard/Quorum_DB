@@ -34,11 +34,17 @@ sudo -i -u postgres
 psql
 ```
 
-Then create the role
+Then create the role corresponding to your username
 
 ```bash
 CREATE ROLE <your_username> WITH CREATEDB, CREATEROLE;
 CREATE DATABASE <your_username>;
+```
+
+## 2. Initialize the Quorum_DB database
+
+```bash
+cd <path_to_Quorum_DB_repository>
 ```
 
 ```psql```
