@@ -47,12 +47,6 @@ Finally, quit psql by typing ```\q``` and deconnect as superuser by typing ```Ct
 
 ## 2. Create the Quorum_DB database
 
-Change into the root of this repository
-
-```bash
-cd <path_to_Quorum_DB_repo>
-```
-
 If you have created a role whose name matches your username, you should be able to open psql, simply as
 
 ```bash
@@ -64,14 +58,27 @@ psql -U <your_username>
 Create the database quorum_db
 
 ```bash
-CREATE DATABASE quorum_db
+CREATE DATABASE quorum_db;
 ```
 
 If you type ```\l``` you will be proud to see that you are the owner of this database
 
 Quit psql by typing ```\q```
 
-```psql```
+## 3. Initialize the Quorum_DB (create the tables)
+
+Change into the root of this repository
+
+```bash
+cd <path_to_Quorum_DB_repo>
+```
+
+And execute the ```create_tables.sql``` script as follow:
+
+```bash
+psql -U <your_username> -d quorum_db -f database/1_init_db/create_tables.sql
+```
+
 ## Nota Bene
 
 Any .sql script present in this repository can be either executed via the shell:
