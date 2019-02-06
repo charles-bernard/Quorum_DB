@@ -5,7 +5,7 @@ Toolkit to initialize, fill, query and admin the Quorum_DB
 
 # BACK END - The Postgresql Database
 
-## Prerequisites
+## 0. Prerequisites
 
 ### Install postgresql
 
