@@ -7,18 +7,18 @@ Toolkit to initialize, fill, query and admin the Quorum_DB
 
 ## Prerequisites
 
-1. install postgresql
+1) Install postgresql
 
 ```bash
 sudo apt-get install postgresql postgresql-contrib
 ```
 
-2. install ete3 python library
+2) install ete3 python library
 
 ```bash
 pip install --upgrade ete3
 ```
-<pre> open python and tell ete3 to fetch NCBI taxonomy database </pre>
+then open a python terminal, import ete3 and fetch the NCBI taxonomy database
 
 ```python
 from ete3 import NCBITaxa
