@@ -87,6 +87,8 @@ Change into the ```2_fill_db/``` directory
 
 And open the ```ìnitial_table.template.csv``` file
 
+This file is the primordial input from which Quorum_DB toolkit will populate all the different tables of the database and fetch all the sequences from the internet. If you want to enter your own entries, please respect meticulously the structure and the nomenclature of this template.
+
 ## Nota Bene
 
 Any .sql script present in this repository can be either executed via the shell:
