@@ -14,7 +14,6 @@ sudo apt-get install postgresql postgresql-contrib
 ```
 
 2) install ete3 python library
-
 ```bash
 pip install --upgrade ete3
 ```
