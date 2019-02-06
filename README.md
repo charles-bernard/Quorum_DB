@@ -41,7 +41,9 @@ CREATE ROLE <your_username> WITH CREATEDB, CREATEROLE;
 CREATE DATABASE <your_username>;
 ```
 
-Type ```\du``` to visualize the privileges of your role
+Type ```\du``` to visualize the privileges of all registered roles
+
+Finally, quit psql by typing ```\q``` and deconnect as superuser by typing ```Ctrl+D```
 
 ## 2. Initialize the Quorum_DB database
 
@@ -55,13 +57,17 @@ If you have created a role whose name matches your username, you should be able 
 
 ```bash
 psql
-```
-
-But if you prefer to be more explicit you can also do:
-
-```bash
+# But if you prefer to be more explicit you can also do:
 psql -U <your_username>
 ```
+
+Create the database quorum_db
+
+```bash
+CREATE DATABASE quorum_db
+```
+
+If you type ```\l``` 
 
 Now, that you are inside psql, under your username, create 
 
