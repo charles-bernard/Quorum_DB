@@ -25,6 +25,23 @@ ncbi = NCBITaxa()
 ncbi.update_taxonomy_database()
 ```
 
+## 1. Create Role with CREATEDB, CREATE ROLE privileges
+
+### Open psql as postgresql superuser
+
+```bash
+sudo -i -u postgres
+psql
+```
+
+### Create Role
+
+```bash
+CREATE ROLE <your_username> WITH CREATEDB, CREATEROLE
+CREATE DATABASE <your_username>
+```
+
+```psql```
 ## Nota Bene
 
 Any .sql script present in this repository can be either executed via the shell:
