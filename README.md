@@ -7,13 +7,13 @@ Toolkit to initialize, fill, query and admin the Quorum_DB
 
 ## 0. Prerequisites
 
-### Install postgresql
+Install postgresql
 
 ```bash
 sudo apt-get install postgresql postgresql-contrib
 ```
 
-### install ete3 python library
+install ete3 python library
 ```bash
 pip install --upgrade ete3
 ```
@@ -27,18 +27,18 @@ ncbi.update_taxonomy_database()
 
 ## 1. Create Role with CREATEDB, CREATE ROLE privileges
 
-### Open psql as postgresql superuser
+Open psql as postgresql superuser
 
 ```bash
 sudo -i -u postgres
 psql
 ```
 
-### Create Role
+Then create the role
 
 ```bash
-CREATE ROLE <your_username> WITH CREATEDB, CREATEROLE
-CREATE DATABASE <your_username>
+CREATE ROLE <your_username> WITH CREATEDB, CREATEROLE;
+CREATE DATABASE <your_username>;
 ```
 
 ```psql```
