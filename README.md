@@ -43,8 +43,10 @@ CREATE DATABASE <your_username>;
 
 ## 2. Initialize the Quorum_DB database
 
+If you have created a role whose name matches your username, you should be able to open psql, simply as
+
 ```bash
-cd <path_to_Quorum_DB_repository>
+psql
 ```
 
 ```psql```
