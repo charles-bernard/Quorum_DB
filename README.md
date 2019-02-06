@@ -7,13 +7,13 @@ Toolkit to initialize, fill, query and admin the Quorum_DB
 
 ## Prerequisites
 
-1) Install postgresql
+### Install postgresql
 
 ```bash
 sudo apt-get install postgresql postgresql-contrib
 ```
 
-2) install ete3 python library
+### install ete3 python library
 ```bash
 pip install --upgrade ete3
 ```
