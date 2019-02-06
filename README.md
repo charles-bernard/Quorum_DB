@@ -41,7 +41,7 @@ CREATE ROLE <your_username> WITH CREATEDB, CREATEROLE;
 CREATE DATABASE <your_username>;
 ```
 
-Type <pre> \du </pre> to visualize the privileges of your role
+Type ```\du``` to visualize the privileges of your role
 
 ## 2. Initialize the Quorum_DB database
 
