@@ -25,7 +25,7 @@ ncbi = NCBITaxa()
 ncbi.update_taxonomy_database()
 ```
 
-## 1. Create Role with CREATEDB, CREATE ROLE privileges
+## 1. Grant to yourself the CREATEDB, CREATE ROLE privileges
 
 Open psql as postgresql superuser
 
