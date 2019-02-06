@@ -19,17 +19,3 @@ ORDER BY
 		function.function),
 	function.gene_name, 
 	sequence.seq_type;
-
--- SELECT DISTINCT ON (reference.reference_id)
--- 	reference.reference_id,
--- 	reference.pubmed_id,
--- 	reference.doi
--- FROM
--- 	reference
--- LEFT JOIN
--- 	function
--- ON
--- 	function.reference_id = reference.reference_id
--- WHERE
--- 	bio_process_id = 1
--- 	AND signal_id = :QUERY_SIGNAL_ID

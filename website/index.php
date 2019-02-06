@@ -18,6 +18,8 @@ if(isset($_POST['chosen_table'])){
 	<body>
 		<?php include 'includes/layout_nav_menu.php' ?>
 
+		<a href="bonjour.php?nom=Dupont&amp;prenom=Jean">toto</a>
+
 		<div>
 			<p>
 			Select the table you want to display
@@ -41,7 +43,7 @@ if(isset($_POST['chosen_table'])){
 			include 'includes/display_query.php';
 
 			// Connect DB
-			$dbconn = pg_connect('host=localhost dbname=quorum_db user=charles password=openit');
+			$dbconn = pg_connect('host=localhost dbname=quorum_db user=visitor password=toto');
 			if (!$dbconn) {
 				echo('An error occurred.\n');
 				exit;
