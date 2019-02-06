@@ -81,6 +81,12 @@ psql -U <your_username> -d quorum_db -f database/1_init_db/create_tables.sql
 
 If you type ```\d``` inside psql, you will see all the tables that have been created
 
+## 4. Populate the Quorum_DB
+
+Change into the ```2_fill_db/``` directory
+
+And open the ```ìnitial_table.template.csv``` file
+
 ## Nota Bene
 
 Any .sql script present in this repository can be either executed via the shell:
