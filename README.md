@@ -41,13 +41,29 @@ CREATE ROLE <your_username> WITH CREATEDB, CREATEROLE;
 CREATE DATABASE <your_username>;
 ```
 
+Type <pre> \du </pre> to visualize the privileges of your role
+
 ## 2. Initialize the Quorum_DB database
+
+Change into the root of this repository
+
+```bash
+cd <path_to_Quorum_DB_repo>
+```
 
 If you have created a role whose name matches your username, you should be able to open psql, simply as
 
 ```bash
 psql
 ```
+
+But if you prefer to be more explicit you can also do:
+
+```bash
+psql -U <your_username>
+```
+
+Now, that you are inside psql, under your username, create 
 
 ```psql```
 ## Nota Bene
