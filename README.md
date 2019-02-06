@@ -45,7 +45,7 @@ Type ```\du``` to visualize the privileges of all registered roles
 
 Finally, quit psql by typing ```\q``` and deconnect as superuser by typing ```Ctrl+D```
 
-## 2. Initialize the Quorum_DB database
+## 2. Create the Quorum_DB database
 
 Change into the root of this repository
 
@@ -67,9 +67,9 @@ Create the database quorum_db
 CREATE DATABASE quorum_db
 ```
 
-If you type ```\l``` 
+If you type ```\l``` you will be proud to see that you are the owner of this database
 
-Now, that you are inside psql, under your username, create 
+Quit psql by typing ```\q```
 
 ```psql```
 ## Nota Bene
