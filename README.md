@@ -5,17 +5,9 @@ Toolkit to initialize, fill, query and admin the Quorum_DB
 
 # BACK END - The Postgresql Database
 
-
-
-
-
-## Wiki of the repository
-
-* [wiki](https://github.com/charles-bernard/Quorum_DB/wiki)
-
 ## Prerequisites
 
-* install postgres
+* install postgresql
 
 ```bash
 sudo apt-get install postgresql postgresql-contrib
@@ -26,7 +18,8 @@ sudo apt-get install postgresql postgresql-contrib
 ```bash
 pip install --upgrade ete3
 ```
-* open python and tell ete3 to fetch NCBI taxonomy database
+
+open python and tell ete3 to fetch NCBI taxonomy database
 
 ```python
 from ete3 import NCBITaxa
@@ -47,3 +40,8 @@ or within a psql session:
 ```SQL
 \i <path_to_sql_script>
 ```
+
+
+## Wiki of the repository
+
+* [wiki](https://github.com/charles-bernard/Quorum_DB/wiki)
