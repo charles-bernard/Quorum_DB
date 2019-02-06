@@ -79,6 +79,8 @@ And execute the ```create_tables.sql``` script as follow:
 psql -U <your_username> -d quorum_db -f database/1_init_db/create_tables.sql
 ```
 
+If you type ```\d``` inside psql, you will see all the tables that have been created
+
 ## Nota Bene
 
 Any .sql script present in this repository can be either executed via the shell:
