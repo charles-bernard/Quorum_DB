@@ -98,7 +98,7 @@ psql -U <your_username>
 
 Create the database quorum_db
 
-```bash
+```psql
 CREATE DATABASE quorum_db;
 ```
 
@@ -145,6 +145,40 @@ Views are tables that often result from the combination of several input relatio
 ```bash
 cd ../
 psql -U <your_username> -d quorum_db -f database/3_create_views/create_views.sql
+```
+
+## 6. Back up the database
+
+Become postgres superuser
+
+```bash
+sudo -i -u postgres
+```
+
+And back up the db
+
+```bash
+pg_dump quorum_db > quorum_db.bak
+```
+
+To restore the db, do it the other way around
+
+```bash
+psql quorum_db < quorum_db.bak
+```
+
+## 7. Kill Quorum_DB
+
+Change into the path of this repository, then execute the following script:
+
+```bash
+psql -U <your_username> -d quorum_db -f database/5_admin_db/drop_tables.sql;
+```
+
+Then connect to psql ```psql``` and type:
+
+```psql
+DROP DATABASE quorum_db;
 ```
 
 
