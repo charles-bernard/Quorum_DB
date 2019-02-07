@@ -18,8 +18,6 @@ if(isset($_POST['chosen_table'])){
 	<body>
 		<?php include 'includes/layout_nav_menu.php' ?>
 
-		<a href="bonjour.php?nom=Dupont&amp;prenom=Jean">toto</a>
-
 		<div>
 			<p>
 			Select the table you want to display
