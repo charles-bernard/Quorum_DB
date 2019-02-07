@@ -3,15 +3,18 @@ Quorum_DB
 
 Toolkit to initialize, fill, query and admin the Quorum_DB
 
-# BACK END - The Postgresql Database
 
-## 0. Prerequisites
+# PREREQUISITES
+
+##  0. Install postgresql to create, query and admin the database
 
 Install postgresql
 
 ```bash
 sudo apt-get install postgresql postgresql-contrib
 ```
+
+## 1. Install the python library 'ete3' to retrieve easily taxonomic attributes of species
 
 install ete3 python library
 ```bash
@@ -25,7 +28,41 @@ ncbi = NCBITaxa()
 ncbi.update_taxonomy_database()
 ```
 
-## 1. Grant to yourself the CREATEDB, CREATE ROLE privileges
+## 2. Install Entrez Programming Utilities to fetch fasta sequences from NCBI databases based on their ID.
+
+[Download the package](http://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/edirect.tar.gz)
+
+Extract it and execute the setup.sh script
+
+```bash
+./edirect/setup.sh
+````
+
+You may need to place the edirect/ directory inside your $PATH
+
+## 3. Install required packages for installing a local webserver
+
+Update your machine
+
+```bash
+sudo apt update && sudo apt upgrade
+```
+
+Install apache2
+
+```bash
+sudo apt install apache2 apache2-utils
+```
+
+Install php
+
+```bash
+sudo apt install php php-pgsql libapache2-mod-php
+```
+
+# BACK END - The Postgresql Database
+
+## 0. Grant yourself the CREATEDB, CREATE ROLE privileges
 
 Open psql as postgresql superuser
 
