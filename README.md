@@ -240,8 +240,3 @@ sudo gedit /etc/hosts
 ## 2. Enjoy!
 
 The front end web browser of the Quorum DB is now serving at http://quorum_db
-
-
-
-## 2. 
-
