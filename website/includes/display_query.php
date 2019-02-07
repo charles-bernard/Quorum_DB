@@ -19,6 +19,7 @@
 		$signal_link = array();
 		$ref_link = array();
 		$species_link = array();
+		$fapath_link = array();
 
 		for($i=0;$i < $n_fields;$i++) {
 			$column_name = pg_field_name($query_result, $i);
@@ -45,6 +46,12 @@
 				array_push($species_link, true);
 			} else {
 				array_push($species_link, false);
+			}
+
+			if($column_name == "fa_path") {
+				array_push($fapath_link, true);
+			} else {
+				array_push($fapath_link, false);
 			}
 		}
 		// <a href="bonjour.php?nom=Dupont&amp;prenom=Jean">Dis-moi bonjour !</a>
@@ -77,6 +84,12 @@
 					echo('" target="_blank">');
 					echo($record[$i]);
 					echo('</a>');
+				} else if($fapath_link[$i]) {
+					$fa_file = basename($record[$i]).PHP_EOL;
+					echo('<a href=data/sequences/publi_reference/');
+					echo($record[$i-1] . '/');
+					echo($fa_file);
+					echo('" target="_blank"> Open Fasta </a>');
 				} else {
 					echo('<font face=' . $font_array[$i] . '>');
 					echo(nl2br($record[$i] . '&nbsp;&nbsp;'));

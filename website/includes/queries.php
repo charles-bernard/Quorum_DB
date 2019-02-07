@@ -20,7 +20,7 @@ function signal_id_2_seq($dbconn, $query_signal_id) {
 			function.gene_name,
 			function.function,
 			sequence.seq_type,
-			sequence.fa_seq 
+			sequence.fa_path 
 		FROM 
 			function
 			LEFT JOIN sequence 
