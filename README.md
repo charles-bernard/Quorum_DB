@@ -215,14 +215,33 @@ GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO visitor;
 
 ## 1. Configure your virtual host
 
-open into an editor the conf template located in ```Quorum_DB/website/setup/webserver_quorum_db.conf.template```
+open the file ```Quorum_DB/website/setup/webserver_quorum_db.conf.template``` into an editor
 
-Replace string REPO_PATH and YOUR_EMAIL_ADDRESS accordingly
+Replace string REPO_PATH and YOUR_EMAIL_ADDRESS by corresponding values
 
-Then move this conf file inside apache available websites directory:
+Then move the conf file inside the apache directory of available websites:
 
 ```bash
 mv Quorum_DB/website/setup/webserver_quorum_db.conf.template /etc/apache2/sites-available/webserver_quorum_db.conf
 ```
 
+Enable the website and reload apache2
+
+```bash
+sudo a2ensite webserver_quorum_db
+sudo service apache2 reload
+```
+
+Add server quorum_db inside your list of hosts by simply adding the line ```127.0.0.1    webserver.dev``` to ```etc/hosts``` file
+
+```bash
+sudo gedit /etc/hosts
+```
+## 2. Enjoy!
+
+The front end web browser of the Quorum DB is now serving at http://quorum_db
+
+
+
+## 2. 
 
