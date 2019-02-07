@@ -181,22 +181,34 @@ Then connect to psql ```psql``` and type:
 DROP DATABASE quorum_db;
 ```
 
+# FRONT END - The web browser
 
-## Nota Bene
+## 0. Create role 'visitor' with read only privileges on the db
 
-Any .sql script present in this repository can be either executed via the shell:
+Become postgresql superuser
 
 ```bash
-psql -U <username> -d <dbname> -f <path_to_sql_script>
+sudo -i -u postgres
 ```
 
-or within a psql session:
+Then create role visitor
 
-```SQL
-\i <path_to_sql_script>
+```psql```
+
+```psql
+CREATE ROLE visitor WITH LOGIN, PASSWORD 'toto';
+CREATE DATABASE visitor;
+GRANT CONNECT ON DATABASE quorum_db TO visitor;
 ```
 
+Quit psql ```\q``` but keep superuser identity to connect to the quorum_db to grant read only privileges 
 
-## Wiki of the repository
+```bash
+psql quorum_db;
+```
 
-* [wiki](https://github.com/charles-bernard/Quorum_DB/wiki)
+```psql
+GRANT USAGE ON SCHEMA public TO visitor;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO visitor;
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO visitor;
+```
