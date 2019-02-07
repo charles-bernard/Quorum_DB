@@ -114,7 +114,7 @@ Change into the root of this repository
 cd <path_to_Quorum_DB_repo>
 ```
 
-And execute the ```create_tables.sql``` script as follow:
+And execute the ```create_tables.sql``` script as follows:
 
 ```bash
 psql -U <your_username> -d quorum_db -f database/1_init_db/create_tables.sql
@@ -136,11 +136,11 @@ Execute the ```fill_db.py``` as follows:
 python -u <your_username> -d quorum_db -i initial_table.template.csv -o ../../website/data
 ```
 
-The output ```data/``` directory will contain the csv files used to populate the db as well as the fasta sequences corresponding to the gene or protein entries.
+The output ```data/``` directory will contain the csv files used to populate the db as well as the fetched fasta sequences corresponding to the gene or protein entries.
 
 ## 5. Create views
 
-Views are tables that often result from the combination of several input relations. If not convenient from a relational point of view, they are optimal for visualization purposes. The view qs_summary will be displayed in the home page of the front end web application.
+Views are tables that often result from the combination of several input relations. If not optimal from a relational point of view, they are very convenient for visualization purposes. The view qs_summary will be displayed in the home page of the front end web application.
 
 ```bash
 cd ../
