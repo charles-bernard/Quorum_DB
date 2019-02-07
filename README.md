@@ -147,7 +147,7 @@ cd ../
 psql -U <your_username> -d quorum_db -f database/3_create_views/create_views.sql
 ```
 
-## 6. Back up the database
+## 6. Back up Quorum_DB
 
 Become postgres superuser
 
@@ -201,7 +201,7 @@ CREATE DATABASE visitor;
 GRANT CONNECT ON DATABASE quorum_db TO visitor;
 ```
 
-Quit psql ```\q``` but keep superuser identity to connect to the quorum_db to grant read only privileges 
+Quit psql ```\q``` but keep superuser identity to connect to the quorum_db and grant read only privileges 
 
 ```bash
 psql quorum_db;
