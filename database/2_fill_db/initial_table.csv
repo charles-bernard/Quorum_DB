@@ -34,8 +34,8 @@ autoinducer peptide	eukaryotic autoinducer peptide	QSP1 (Quorum Sensing-like Pep
 signaling molecule	DPO (3,5-dimethylPyrazin-2-ol)	DPO	3,5-dimethylpyrazin-2-ol			666	Vibrio cholerae	tdh	NC_002506.1	Nucleotide	C-838923_837892	NP_233271.1	Protein	synthase	biofilm inhibition|virulence inhibition	28319101	11	
 signaling molecule	DPO (3,5-dimethylPyrazin-2-ol)	DPO	3,5-dimethylpyrazin-2-ol			666	Vibrio cholerae	vqmA	NC_002506.1	Nucleotide	N-1031679_1032419	NP_233459.2	Protein	receptor	biofilm inhibition|virulence inhibition	28319101	11	
 signaling molecule	DPO (3,5-dimethylPyrazin-2-ol)	DPO	3,5-dimethylpyrazin-2-ol			666	Vibrio cholerae	vqmR	CP001236.1	Nucleotide	N-419685_419805			response_regulator	biofilm inhibition|virulence inhibition	28319101	11	
-signaling molecule	DPO (3,5-dimethylPyrazin-2-ol)	DPO	3,5-dimethylpyrazin-2-ol			261726	Vibrio virus VP882	vqmA_phage	NC_009016.1	Nucleotide	N-28328_29035	YP_001039867.1	Protein	receptor	lysis	28319101	12	
-signaling molecule	DPO (3,5-dimethylPyrazin-2-ol)	DPO	3,5-dimethylpyrazin-2-ol			261726	Vibrio virus VP882	qtip	NC_009016.1	Nucleotide	C-28219_27980	YP_001039866.1	Protein	response_regulator	lysis	28319101	12	
+signaling molecule	DPO (3,5-dimethylPyrazin-2-ol)	DPO	3,5-dimethylpyrazin-2-ol			261726	Vibrio virus VP882	vqmA_phage	NC_009016.1	Nucleotide	N-28328_29035	YP_001039867.1	Protein	receptor	lysis	28319101	11	
+signaling molecule	DPO (3,5-dimethylPyrazin-2-ol)	DPO	3,5-dimethylpyrazin-2-ol			261726	Vibrio virus VP882	qtip	NC_009016.1	Nucleotide	C-28219_27980	YP_001039866.1	Protein	response_regulator	lysis	28319101	11	
 signaling molecule	HAQ (4-hydroxy-2-alkylquinoline)	PQS (Pseudomonas Quinolone Signal)	2-heptyl-3-hydroxy-4-quinolone			287	Pseudomonas aeruginosa	phnA	NC_002516.2	Nucleotide	N-1083972_1085564	NP_249692.1	Protein	synthase	virulence|production of pyocyanin	22390972	13	
 signaling molecule	HAQ (4-hydroxy-2-alkylquinoline)	PQS (Pseudomonas Quinolone Signal)	2-heptyl-3-hydroxy-4-quinolone			287	Pseudomonas aeruginosa	phnB	NC_002516.2	Nucleotide	N-1085542_1086144	NP_249693.1	Protein	synthase	virulence|production of pyocyanin	22390972	13	
 signaling molecule	HAQ (4-hydroxy-2-alkylquinoline)	PQS (Pseudomonas Quinolone Signal)	2-heptyl-3-hydroxy-4-quinolone			287	Pseudomonas aeruginosa	pqsA	NC_002516.2	Nucleotide	N-1078462_1080015	NP_249687.1	Protein	synthase	virulence|production of pyocyanin	22390972	13	
@@ -102,8 +102,8 @@ signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			672	Vibrio vulnif
 signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			668	Aliivibrio fischeri	luxR	M19039.1	Nucleotide	C-770_18	AAA27551.1	Protein	receptor	bioluminescence	10510239 | 19928886	29	DKP-LuxR interaction is contradicted by PUBMID 19928886
 signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			668	Aliivibrio fischeri	luxR	M19039.1	Nucleotide	C-770_18	AAA27551.1	Protein	response_regulator	bioluminescence	10510239 | 19928886	29	DKP-LuxR interaction is contradicted by PUBMID 19928886
 signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			672	Vibrio vulnificus	Uncharacterized CDPS or NRPS						synthase		29686409	30	
-signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			672	Vibrio vulnificus	ToxR	NC_006840.2	Nucleotide	C-865411_864530	YP_204174.1	Protein	receptor		29914931	30	
-signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			672	Vibrio vulnificus	ToxS	NC_006840.2	Nucleotide	C-864539_863994	YP_204173.1	Protein	receptor		29914931	30	
+signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			672	Vibrio vulnificus	toxR	NC_006840.2	Nucleotide	C-865411_864530	YP_204174.1	Protein	receptor		29914931	30	
+signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			672	Vibrio vulnificus	toxS	NC_006840.2	Nucleotide	C-864539_863994	YP_204173.1	Protein	receptor		29914931	30	
 signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			672	Vibrio vulnificus	leuO	NC_006840.2	Nucleotide	C-2544063_2543092	YP_205648.1	Protein	response_regulator	virulence inhibition	29914931 | 23982069 | 16513751	30	
 signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			672	Vibrio vulnificus	rpoS	NC_006840.2	Nucleotide	C-2304236_2303271	YP_205450.1	Protein	response_regulator	detoxification of ROS	29914931	30	
 signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			666	Vibrio cholerae	Uncharacterized CDPS or NRPS						synthase		20453095 | 16513731	31	virulence inhibition is contradicted by PUBMID 16513731
@@ -113,17 +113,10 @@ autoinducer peptide	Staphyloccocus aureus AIP	cyclic AIP	AIP (I, II, III and IV)
 autoinducer peptide	Staphyloccocus aureus AIP	cyclic AIP	AIP (I, II, III and IV)			1280	Staphylococcus aureus	agrC	U85096.1	Nucleotide	N-359_1651	AAB80777.1	Protein	receptor	virulence	11544353	32	
 autoinducer peptide	Staphyloccocus aureus AIP	cyclic AIP	AIP (I, II, III and IV)			1280	Staphylococcus aureus	agrA	X52543.1	Nucleotide	C-5855_4896	CAA36785.1	Protein	response_regulator	virulence	11544353	32	
 signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			1280	L. reuteri RC-14	Uncharacterized CDPS or NRPS						synthase	interference with S. aureus agr QS system | repression of production of exotoxin toxic shock syndrome toxin-1 in S. aureus	21282650	33	
-signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			1280	Staphylococcus aureus								interference with S. aureus agr QS system | repression of production of exotoxin toxic shock syndrome toxin-1 in S. aureus	21282650	33	
+signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			1280	Staphylococcus aureus	NA						NA	interference with S. aureus agr QS system | repression of production of exotoxin toxic shock syndrome toxin-1 in S. aureus	21282650	33	
 signaling molecule	HSL (Homoserine Lactone)	saturated HSL	N-Octanoyl-L-homoserine lactone	C8-HSL		668	Aliivibrio fischeri	ainS	L37404.1	Nucleotide	N-407_1594	AAA81582.1	Protein	synthase	bioluminescence	28916743	34	
 signaling molecule	HSL (Homoserine Lactone)	saturated HSL	N-Octanoyl-L-homoserine lactone	C8-HSL		668	Aliivibrio fischeri	ainR	L37404.1	Nucleotide	N-1606_2126	AAA81583.1	Protein	receptor	bioluminescence	28916743	34	
 signaling molecule	HSL (Homoserine Lactone)	saturated HSL	N-Octanoyl-L-homoserine lactone	C8-HSL		668	Aliivibrio fischeri	ainR	L37404.1	Nucleotide	N-1606_2126	AAA81583.1	Protein	response_regulator	bioluminescence	28916743	34	
-signaling molecule	HSL (Homoserine Lactone)	carbonyl HSL	N-(3-oxohexanoyl)-homoserine lactone	3OC6-HSL		668	Aliivibrio fischeri	luxI	M19039.1	Nucleotide	N-989_1570	AAA27552.1	Protein	synthase	bioluminescence	11544353	35	
-signaling molecule	HSL (Homoserine Lactone)	carbonyl HSL	N-(3-oxohexanoyl)-homoserine lactone	3OC6-HSL		668	Aliivibrio fischeri	luxR	M19039.1	Nucleotide	C-770_18	AAA27551.1	Protein	receptor	bioluminescence	11544353	35	
-signaling molecule	HSL (Homoserine Lactone)	carbonyl HSL	N-(3-oxohexanoyl)-homoserine lactone	3OC6-HSL		668	Aliivibrio fischeri	luxR	M19039.1	Nucleotide	C-770_18	AAA27551.1	Protein	response_regulator	bioluminescence	11544353	35	
-																		
-																		
-																		
-																		
-signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)			287	Pseudomonas aeruginosa	Uncharacterized CDPS						synthase		10510239	32	
-signaling molecule	DKP (Diketopiperazine)	DKP	cyclo(Phe-Pro)				Escherichia coli GutM4							synthase		https://doi.org/10.1016/j.ejbt.2017.04.003	33	
-							Streptomyces sp. AMLK-335								inhibitor of topoisomerase I	https://doi.org/10.1.1.567.3226	34	
+signaling molecule	HSL (Homoserine Lactone)	carbonyl HSL	N-(3-oxohexanoyl)-homoserine lactone	3OC6-HSL		668	Aliivibrio fischeri	luxI	M19039.1	Nucleotide	N-989_1570	AAA27552.1	Protein	synthase	bioluminescence	11544353	12	
+signaling molecule	HSL (Homoserine Lactone)	carbonyl HSL	N-(3-oxohexanoyl)-homoserine lactone	3OC6-HSL		668	Aliivibrio fischeri	luxR	M19039.1	Nucleotide	C-770_18	AAA27551.1	Protein	receptor	bioluminescence	11544353	12	
+signaling molecule	HSL (Homoserine Lactone)	carbonyl HSL	N-(3-oxohexanoyl)-homoserine lactone	3OC6-HSL		668	Aliivibrio fischeri	luxR	M19039.1	Nucleotide	C-770_18	AAA27551.1	Protein	response_regulator	bioluminescence	11544353	12	
