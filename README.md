@@ -172,7 +172,7 @@ psql quorum_db < quorum_db.bak
 Change into the path of this repository, then execute the following script:
 
 ```bash
-psql -U <your_username> -d quorum_db -f database/5_admin_db/drop_tables.sql;
+psql -U <your_username> -d quorum_db -f database/5_admin_db/drop_tables.sql
 ```
 
 Then connect to psql ```psql``` and type:
@@ -204,7 +204,7 @@ GRANT CONNECT ON DATABASE quorum_db TO visitor;
 Quit psql ```\q``` but keep superuser identity to connect to the quorum_db and grant read only privileges 
 
 ```bash
-psql quorum_db;
+psql quorum_db
 ```
 
 ```psql
@@ -212,3 +212,17 @@ GRANT USAGE ON SCHEMA public TO visitor;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO visitor;
 GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO visitor;
 ```
+
+## 1. Configure your virtual host
+
+open into an editor the conf template located in ```Quorum_DB/website/setup/webserver_quorum_db.conf.template```
+
+Replace string REPO_PATH and YOUR_EMAIL_ADDRESS accordingly
+
+Then move this conf file inside apache available websites directory:
+
+```bash
+mv Quorum_DB/website/setup/webserver_quorum_db.conf.template /etc/apache2/sites-available/webserver_quorum_db.conf
+```
+
+
