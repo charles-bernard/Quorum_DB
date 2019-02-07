@@ -88,7 +88,11 @@ If you have created a role whose name matches your username, you should be able 
 
 ```bash
 psql
-# But if you prefer to be more explicit you can also do:
+```
+
+If this does not work out, try:
+
+```
 psql -U <your_username>
 ```
 
@@ -125,6 +129,24 @@ Change into the ```2_fill_db/``` directory
 And open the ```ìnitial_table.template.csv``` file
 
 This file is the primordial input from which Quorum_DB toolkit will populate all the different tables of the database and fetch all the sequences from the internet. If you want to enter your own entries, please respect meticulously the structure and the nomenclature of this template.
+
+Execute the ```fill_db.py``` as follows:
+
+```bash
+python -u <your_username> -d quorum_db -i initial_table.template.csv -o ../../website/data
+```
+
+The output ```data/``` directory will contain the csv files used to populate the db as well as the fasta sequences corresponding to the gene or protein entries.
+
+## 5. Create views
+
+Views are tables that often result from the combination of several input relations. If not convenient from a relational point of view, they are optimal for visualization purposes. The view qs_summary will be displayed in the home page of the front end web application.
+
+```bash
+cd ../
+psql -U <your_username> -d quorum_db -f database/3_create_views/create_views.sql
+```
+
 
 ## Nota Bene
 
