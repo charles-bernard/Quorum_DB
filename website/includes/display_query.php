@@ -5,11 +5,31 @@
 
 		$n_fields = pg_num_fields($query_result);
 
+
+
 		// TABLE HEADER
 		echo('<tr>');
 		for($i=0;$i < $n_fields;$i++) {
 			$column_name = pg_field_name($query_result, $i);
 			echo('<td>' . '<b>' . $column_name . '&nbsp;&nbsp;' . '</b>' . '</td>');
+		}
+		echo('</tr>');
+
+		// FILTER ROW
+		echo('<tr>');
+		echo('<td bgcolor="Cornsilk">filter by</td>');
+		for($i=1;$i < $n_fields;$i++) {
+			$column_name = pg_field_name($query_result, $i);
+			echo('<td bgcolor="Cornsilk">');
+			echo('<form action="#" method="post">');
+			echo('<input type="hidden" name="filtered_col" value="');
+			echo($column_name);
+			echo('">');
+			echo('<input type="text" name="filter_val" size="5">');
+			echo('<br>');
+			echo('<button name="toto" size="5">Filter</button>');
+			echo('</form>');
+			echo('</td>');
 		}
 		echo('</tr>');
 
@@ -70,7 +90,7 @@
 					echo('<a href="signal_report.php?val=');
 					echo($record[$i]);
 					echo('">');
-					echo($record[$i]);
+					echo('browse id ' . $record[$i]);
 					echo('</a>');
 				} else if($ref_link[$i]) {
 					echo('<a href="http://www.ncbi.nlm.nih.gov/pubmed/');
@@ -85,11 +105,13 @@
 					echo($record[$i]);
 					echo('</a>');
 				} else if($fapath_link[$i]) {
-					$fa_file = basename($record[$i]).PHP_EOL;
-					echo('<a href=data/sequences/publi_reference/');
-					echo($record[$i-1] . '/');
-					echo($fa_file);
-					echo('" target="_blank"> Open Fasta </a>');
+					if($record[$i]) {
+						$fa_file = basename($record[$i]).PHP_EOL;
+						echo('<a href=data/sequences/publi_reference/');
+						echo($record[$i-1] . '/');
+						echo($fa_file);
+						echo('" target="_blank"> Open Fasta </a>');
+					}
 				} else {
 					echo('<font face=' . $font_array[$i] . '>');
 					echo(nl2br($record[$i] . '&nbsp;&nbsp;'));
