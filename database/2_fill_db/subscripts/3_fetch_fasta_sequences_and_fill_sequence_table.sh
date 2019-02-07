@@ -10,7 +10,7 @@ function create_dir {
 	fi
 }
 SEQ_CDS_DIR="$WORKING_DIR"/"sequences"/"publi_reference"/"cds";
-SEQ_PROT_DIR="$WORKING_DIR"/"sequences"/"publi_reference"/"proteins";
+SEQ_PROT_DIR="$WORKING_DIR"/"sequences"/"publi_reference"/"protein";
 ASSEMBLY_DIR="$WORKING_DIR"/"sequences"/"publi_reference"/"assembly";
 create_dir "$SEQ_CDS_DIR";
 create_dir "$SEQ_PROT_DIR";
