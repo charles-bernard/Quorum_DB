@@ -8,7 +8,7 @@
 	</head>
 
 	<body>
-		<?php include 'includes/layout_nav_menu.php' ?>
+		<?php include 'includes/layout_head.php' ?>
 
  		<div>
 		<?php
@@ -41,6 +41,8 @@
 
 		<?php
 			if(isset($_POST['do_query_1'])){
+				echo('<hr>');
+				echo('<h3> Signal Families </h3>');
  				$result = list_all_signal_families($dbconn);
  			}
 			// } elseif(isset($_POST['do_query_2'])) {

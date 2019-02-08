@@ -1,14 +1,24 @@
 <?php
 
 function list_all_signal_families($dbconn) {
-	$results = pg_query($dbconn,
-		"SELECT 
-			DISTINCT ON (signal_supercategory, signal_family)
-			signal_supercategory,
-			signal_family
+	$results = pg_query($dbconn, 
+		"WITH hsl_signal AS
+			(SELECT DISTINCT ON (signal_supercategory, signal_family, signal_trivial_name)
+				signal_supercategory,
+				signal_family,
+				signal_trivial_name AS \"hsl_subfamily\"
+			FROM signal
+			WHERE signal_trivial_name ~ 'HSL')
+		SELECT DISTINCT ON (signal.signal_supercategory, signal.signal_family, hsl_signal.hsl_subfamily)
+			signal.signal_supercategory,
+			signal.signal_family,
+			hsl_signal.hsl_subfamily
 		FROM signal
-		WHERE signal_id != 0
-		ORDER BY signal_supercategory");
+			LEFT JOIN hsl_signal
+			ON 
+				signal.signal_trivial_name = hsl_signal.hsl_subfamily
+		WHERE signal.signal_id != 0
+		ORDER BY signal.signal_supercategory, signal.signal_family, hsl_signal.hsl_subfamily");
 
 	return $results;
 }
@@ -83,7 +93,8 @@ function signal_id_2_response($dbconn, $query_signal_id) {
 	$results = pg_query($dbconn,
 		"SELECT DISTINCT ON (bio_process.bio_process_id)
 			bio_process.bio_process_id,
-			bio_process.bio_process
+			bio_process.bio_process,
+			function.species_name AS \"in\"
 		FROM
 			bio_process
 		LEFT JOIN function

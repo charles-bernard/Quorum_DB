@@ -4,7 +4,6 @@
 if(isset($_POST['chosen_table'])){
  	$curr_table = $_POST['chosen_table'];
 } else if((!$curr_table)) {
-	echo('toto');
 	$curr_table = "qs_summary";
 }
 if(isset($_POST['filtered_col'])){
@@ -27,9 +26,7 @@ if(isset($_POST['filter_val'])){
 	</head>
 
 	<body>
-		<?php include 'includes/layout_nav_menu.php' ?>
-
-		<?php echo($curr_table) ?>
+		<?php include 'includes/layout_head.php' ?>
 
 		<div>
 			<p>
@@ -40,7 +37,6 @@ if(isset($_POST['filter_val'])){
 					<option value="gene">Gene</option>
 					<option value="reference">Reference</option>
 					<option value="signal">Signal</option>
-					<!-- <option value="sequence">Sequence</option> -->
 					<option value="species">Species</option>
 				</select>
 				<input type="submit" value="Display the table"/>
@@ -50,7 +46,7 @@ if(isset($_POST['filter_val'])){
 		</div>
 
 		<form action="" method="post">
-			<input type="hidden" name="chosen_table" value="<?php echo($curr_table); ?>">
+			
 		</form>
 
  		<div>
@@ -68,11 +64,11 @@ if(isset($_POST['filter_val'])){
 				if($curr_table == "qs_summary") {
 					$result = pg_query($dbconn, 
 						"SELECT * FROM {$curr_table}
-						WHERE {$filtered_col} ~ '{$filter_val}'");
+						WHERE {$filtered_col} ~ '(?i){$filter_val}'");
 				} else {
 					$result = pg_query($dbconn, 
 						"SELECT * FROM {$curr_table} 
-						WHERE {$filtered_col} ~ '{$filter_val}'
+						WHERE {$filtered_col} ~ '(?i){$filter_val}'
 						ORDER BY 1, 2");
 				}
 			} else {
@@ -84,16 +80,13 @@ if(isset($_POST['filter_val'])){
 				}
 			}
 
-			print_table($result);
+			print_table($result, $curr_table);
 			pg_free_result($result);
 
 		?>
 		</div>
 
-
-
-
-
+	<hr><br>
 	</body>
 
 </html>

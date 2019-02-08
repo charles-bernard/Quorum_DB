@@ -1,11 +1,9 @@
 <?php
 
-	function print_table($query_result) {
+	function print_table($query_result, $curr_table) {
 		echo('<table border=1 frame=void rules=all>');
 
 		$n_fields = pg_num_fields($query_result);
-
-
 
 		// TABLE HEADER
 		echo('<tr>');
@@ -16,22 +14,26 @@
 		echo('</tr>');
 
 		// FILTER ROW
-		echo('<tr>');
-		echo('<td bgcolor="Cornsilk">filter by</td>');
-		for($i=1;$i < $n_fields;$i++) {
-			$column_name = pg_field_name($query_result, $i);
-			echo('<td bgcolor="Cornsilk">');
-			echo('<form action="#" method="post">');
-			echo('<input type="hidden" name="filtered_col" value="');
-			echo($column_name);
-			echo('">');
-			echo('<input type="text" name="filter_val" size="5">');
-			echo('<br>');
-			echo('<button name="toto" size="5">Filter</button>');
-			echo('</form>');
-			echo('</td>');
+		if(basename($_SERVER['PHP_SELF']) == "index.php" || basename($_SERVER['PHP_SELF']) == "index.php#") {
+			echo('<tr>');
+			echo('<td bgcolor="Cornsilk">filter by</td>');
+			for($i=1;$i < $n_fields;$i++) {
+				$column_name = pg_field_name($query_result, $i);
+				if($column_name != "functions" and $column_name != "pubmed_id" and $column_name != "ncbi_tax_id") {
+					echo('<td bgcolor="Cornsilk">');
+					echo('<form action="" method="post">');
+					echo('<input type="hidden" name="filtered_col" value="' . $column_name .'">');
+					echo('<input type="hidden" name="chosen_table" value="' . $curr_table .'">');
+					echo('<input type="text" name="filter_val" style="width:110px"><br>');
+					echo('<button name="filter" style="width:125px">Filter</button>');
+					echo('</form>');
+					echo('</td>');
+				} else {
+					echo('<td bgcolor="Cornsilk"></td>');
+				}
+			}
+			echo('</tr>');
 		}
-		echo('</tr>');
 
 
 		// COLUMN DISPLAY SPECIFICITIES
@@ -74,7 +76,6 @@
 				array_push($fapath_link, false);
 			}
 		}
-		// <a href="bonjour.php?nom=Dupont&amp;prenom=Jean">Dis-moi bonjour !</a>
 
 		// TABLE CONTENT
 		$k = 1;
@@ -87,30 +88,18 @@
 			for($i=0;$i<$n_fields;$i++) {
 				echo('<td>');
 				if($signal_link[$i]) {
-					echo('<a href="signal_report.php?val=');
-					echo($record[$i]);
-					echo('">');
-					echo('browse id ' . $record[$i]);
-					echo('</a>');
+					echo('<a href="signal_report.php?val=' . $record[$i] . '" target="_blank">');
+					echo('browse id ' . $record[$i] . '</a>');
 				} else if($ref_link[$i]) {
-					echo('<a href="http://www.ncbi.nlm.nih.gov/pubmed/');
-					echo($record[$i]);
-					echo('"target="_blank">');
-					echo($record[$i]);
-					echo('</a>');
+					echo('<a href="http://www.ncbi.nlm.nih.gov/pubmed/' . $record[$i] . '" target="_blank">');
+					echo($record[$i] . '</a>');
 				} else if($species_link[$i]) {
-					echo('<a href="http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?name=');
-					echo($record[$i]);
-					echo('" target="_blank">');
-					echo($record[$i]);
-					echo('</a>');
+					echo('<a href="http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?name=' . $record[$i] . '" target="_blank">');
+					echo($record[$i] . '</a>');
 				} else if($fapath_link[$i]) {
 					if($record[$i]) {
 						$fa_file = basename($record[$i]).PHP_EOL;
-						echo('<a href=data/sequences/publi_reference/');
-						echo($record[$i-1] . '/');
-						echo($fa_file);
-						echo('" target="_blank"> Open Fasta </a>');
+						echo('<a href=data/sequences/publi_reference/' . $record[$i-1] . '/' . $fa_file . ' target="_blank"> Open Fasta </a>');
 					}
 				} else {
 					echo('<font face=' . $font_array[$i] . '>');
@@ -123,6 +112,6 @@
 			++$k;
 		}
 
-		echo('</table');
+		echo('</table>');
   }
 ?>

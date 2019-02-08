@@ -17,7 +17,7 @@ if(isset($_GET['val'])){
 
 	<body>
 		<?php 
-			include 'includes/layout_nav_menu.php';
+			include 'includes/layout_head.php';
 			include 'includes/display_query.php';
 			include 'includes/queries.php';
 		?>
@@ -37,7 +37,8 @@ if(isset($_GET['val'])){
 			<h2> Signal Characteristics </h2>
 			<?php
 				$result = pg_query($dbconn, 
-					"SELECT signal_id, signal_supercategory, signal_family, signal_trivial_name,  	signal_systematic_name, signal_chemical_formula, peptide_sequence, structure_img
+					"SELECT signal_id, signal_supercategory, signal_family, signal_trivial_name,  	
+					signal_systematic_name, signal_chemical_formula, peptide_sequence, structure_img
 					FROM signal WHERE signal_id='{$query_signal_id}'");
 				print_table($result);
 				pg_free_result($result);
@@ -72,7 +73,7 @@ if(isset($_GET['val'])){
 		<br>
 		<table border = 0>
 			<td>
-			<h2> Host Organism </h2>
+			<h2> Host Organism(s) </h2>
 			<?php
 				$result = signal_id_2_species($dbconn, $query_signal_id);
 				print_table($result);
@@ -105,6 +106,7 @@ if(isset($_GET['val'])){
 			</td>
 		</table>
 
+	<hr><br>
 	</body>
 
 </html>
