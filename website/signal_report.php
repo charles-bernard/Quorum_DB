@@ -55,9 +55,7 @@ if(isset($_GET['val'])){
 			?>
 			</tr>
 		</table>
-
-
-
+		
 		<br>
 		<table border = 0>
 			<td>
@@ -82,6 +80,7 @@ if(isset($_GET['val'])){
 			</td>
 		</table>
 
+		
 		<br>
 		<table border = 0>
 			<td>
@@ -93,6 +92,7 @@ if(isset($_GET['val'])){
 			?>
 			</td>
 		</table>
+
 
 		<br>
 		<table border = 0>

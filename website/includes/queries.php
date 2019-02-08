@@ -23,6 +23,35 @@ function list_all_signal_families($dbconn) {
 	return $results;
 }
 
+function list_interspecies_qs($dbconn) {
+	$results = pg_query($dbconn,
+		"WITH unique_signal AS
+			(SELECT 
+				DISTINCT ON (species_name, signal_id) 
+				species_name, signal_id
+		FROM function
+		WHERE bio_process_id = 1)
+		SELECT 
+			-- DISTINCT ON (unique_signal.signal_id, qs_summary.genes)
+			unique_signal.signal_id,
+			qs_summary.species_name,
+			qs_summary.genes,
+			qs_summary.functions
+		FROM unique_signal
+			LEFT JOIN qs_summary
+			ON
+				unique_signal.signal_id = qs_summary.id
+		GROUP BY 
+			unique_signal.signal_id, 
+			qs_summary.species_name, 
+			qs_summary.genes,
+			qs_summary.functions
+		HAVING COUNT(unique_signal.signal_id) > 1
+		ORDER BY unique_signal.signal_id");
+
+	return $results;
+}
+
 function signal_id_2_seq($dbconn, $query_signal_id) {
 	$results = pg_query($dbconn, 
 		"SELECT 
@@ -37,7 +66,9 @@ function signal_id_2_seq($dbconn, $query_signal_id) {
 			ON
 				function.gene_name = sequence.gene_name
 				AND function.species_name = sequence.species_name 
-		WHERE function.signal_id = '{$query_signal_id}' AND bio_process_id = 1
+		WHERE function.signal_id = '{$query_signal_id}' 
+		AND bio_process_id = 1
+		AND reference_id != 0
 		ORDER BY 
 			array_position(
 			ARRAY['synthase', 'modifier_transporter', 'receptor', 'response_regulator']::VARCHAR[], 
@@ -60,7 +91,8 @@ function signal_id_2_ref($dbconn, $query_signal_id) {
 		ON
 			function.reference_id = reference.reference_id
 		WHERE
-			bio_process_id = 1
+			bio_process_id = 1 
+			AND reference.reference_id != 0
 			AND signal_id = '{$query_signal_id}'");
 
 	return $results;

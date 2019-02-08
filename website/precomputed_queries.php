@@ -30,12 +30,11 @@
 						<button name="do_query_1">List all signal families</button>
 					</form>
 				</li>
-	<!-- 			<li>
+				<li> 
 					<form action="#" method="post">
-						Type in Signal id:<input type="text" name="query_signal_id">
-						<button name="do_query_2">Signal id to gene sequences</button>
+						<button name="do_query_2">List entries with interspecies QS</button>
 					</form>
-				</li> -->
+				</li>
 			</ul>
 		</div>
 
@@ -44,18 +43,17 @@
 				echo('<hr>');
 				echo('<h3> Signal Families </h3>');
  				$result = list_all_signal_families($dbconn);
- 			}
-			// } elseif(isset($_POST['do_query_2'])) {
-			// 	if(isset($_POST['query_signal_id'])) {
-			// 		$result = signal_id_to_gene_sequences($dbconn, $_POST['query_signal_id']);
-			// 	}
-			// }
+			} elseif(isset($_POST['do_query_2'])) {
+				echo('<hr>');
+				echo('<h3> Entries with interspecies QS </h3>');
+ 				$result = list_interspecies_qs($dbconn);
+			}
 			print_table($result);
 			pg_free_result($result);
 		?>
 		</div>
 
-
+	<hr><br>
 	</body>
 
 </html>

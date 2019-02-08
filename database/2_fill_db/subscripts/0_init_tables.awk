@@ -88,7 +88,12 @@ NR > 1 {
 			if(!reference_id[pubmed_ids[i]]) {
 				r++;
 				reference_id[pubmed_ids[i]] = r;
-				print r "\t" pubmed_ids[i] "\t\t" > reference_table;
+				if(pubmed_ids[i] ~ /^[0-9]+$/) {
+					print r "\t" pubmed_ids[i] "\t\t" > reference_table;
+				} else {
+					# then it is considered as doi
+					print r "\t\t" pubmed_ids[i] "\t" > reference_table
+				}
 			}
 		}
 		pubmed_ids[i] = "0";
