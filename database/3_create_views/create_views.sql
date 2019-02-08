@@ -1,4 +1,4 @@
-DROP VIEW qs_summary;
+-- DROP VIEW qs_summary;
 CREATE VIEW qs_summary AS
 	WITH qs_unsorted_summary AS
 		(WITH response AS
@@ -32,12 +32,14 @@ CREATE VIEW qs_summary AS
 				ON function.signal_id = signal.signal_id
 		WHERE 
 			function.signal_id != 0 AND 
-			function.bio_process_id = 1
+			function.bio_process_id = 1 AND
+			function.reference_id = 0
 		GROUP BY 
 			species.superkingdom,
 			species.phylum,
 			function.species_name,
 			function.signal_id,
+			function.gene_name,
 			response.response,
 			signal.signal_supercategory,
 			signal.signal_family)

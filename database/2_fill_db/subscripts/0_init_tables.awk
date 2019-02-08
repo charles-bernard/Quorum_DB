@@ -81,6 +81,7 @@ NR > 1 {
 		response_bioprocesses[1] = "";
 	}
 
+	delete pubmed_ids;
 	if(pubmed_id) {
 		split(pubmed_id, pubmed_ids, "|");
 		for(i = 1; i <= length(pubmed_ids); i++) {
@@ -90,6 +91,8 @@ NR > 1 {
 				print r "\t" pubmed_ids[i] "\t\t" > reference_table;
 			}
 		}
+		pubmed_ids[i] = "0";
+		reference_id[pubmed_ids[i]] = "0";
 	} else {
 		pubmed_ids[1] = "0";
 		reference_id[pubmed_ids[1]] = "0";
