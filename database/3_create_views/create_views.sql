@@ -39,7 +39,6 @@ CREATE VIEW qs_summary AS
 			species.phylum,
 			function.species_name,
 			function.signal_id,
-			function.gene_name,
 			response.response,
 			signal.signal_supercategory,
 			signal.signal_family)
