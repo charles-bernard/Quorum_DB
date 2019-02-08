@@ -52,6 +52,62 @@ function list_interspecies_qs($dbconn) {
 	return $results;
 }
 
+function list_orphan_module($dbconn, $query) {
+	if($query == "synthase") {
+		$target = "receptor";
+	} else {
+		$target = "synthase";
+	}
+	$results = pg_query($dbconn,
+		"WITH {$query} AS
+			(SELECT 
+				function.signal_id,
+				function.species_name,
+				function.function
+			FROM function
+				LEFT JOIN gene
+				ON (function.gene_name = gene.gene_name AND function.species_name = gene.species_name)
+			WHERE
+				function.bio_process_id = 1 
+				AND function.reference_id = 0
+				AND function.function = '{$query}'
+				AND (gene.gene_id IS NOT NULL OR gene.prot_id IS NOT NULL)),
+		{$target} AS
+			(SELECT 
+				function.signal_id,
+				function.species_name,
+				function.function
+			FROM function
+				LEFT JOIN gene
+				ON (function.gene_name = gene.gene_name AND function.species_name = gene.species_name)
+			WHERE
+				function.bio_process_id = 1 
+				AND reference_id = 0
+				AND function.function = '{$target}'
+				AND (gene.gene_id IS NOT NULL OR gene.prot_id IS NOT NULL))
+		SELECT 
+			DISTINCT ON(qs_summary.id, qs_summary.species_name)
+			qs_summary.id,
+			qs_summary.species_name,
+			qs_summary.genes,
+			qs_summary.functions
+		FROM {$query}
+			LEFT OUTER JOIN {$target}
+				ON ({$query}.signal_id = {$target}.signal_id
+				AND {$query}.species_name = {$target}.species_name)
+			LEFT JOIN qs_summary
+				ON ({$query}.signal_id = qs_summary.id
+				AND {$query}.species_name = qs_summary.species_name)
+		WHERE 
+			{$target}.function IS NULL
+		GROUP BY 
+			qs_summary.id,
+			qs_summary.species_name,
+			qs_summary.genes,
+			qs_summary.functions");
+	return $results;
+}
+
 function signal_id_2_seq($dbconn, $query_signal_id) {
 	$results = pg_query($dbconn, 
 		"SELECT 

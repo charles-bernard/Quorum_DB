@@ -35,6 +35,11 @@
 						<button name="do_query_2">List entries with interspecies QS</button>
 					</form>
 				</li>
+				<li> 
+					<form action="#" method="post">
+						<button name="do_query_3">List orphan synthases and receptors</button>
+					</form>
+				</li>
 			</ul>
 		</div>
 
@@ -47,6 +52,15 @@
 				echo('<hr>');
 				echo('<h3> Entries with interspecies QS </h3>');
  				$result = list_interspecies_qs($dbconn);
+			} elseif(isset($_POST['do_query_3'])) {
+				echo('<hr>');
+				echo('<h3> Entries with synthase(s) whose signal cognate receptor is not present or not yet characterized in the species</h3>');
+				$result = list_orphan_module($dbconn, 'synthase');
+				print_table($result);
+				pg_free_result($result);
+				echo('<hr>');
+				echo('<h3> Entries with receptor whose signal cognate synthase(s) are not present or not yet characterized in the species</h3>');
+				$result = list_orphan_module($dbconn, 'receptor');
 			}
 			print_table($result);
 			pg_free_result($result);
