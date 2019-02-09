@@ -10,14 +10,11 @@ if(isset($_GET['val'])){
 
 <html>
 
-	<head>
- 		<title>Quorum DB</title>
-		<meta charset="utf-8" />
-	</head>
+	<?php include 'includes/head.php' ?>
 
 	<body>
 		<?php 
-			include 'includes/layout_head.php';
+			include 'includes/banner_and_menu.php';
 			include 'includes/display_query.php';
 			include 'includes/queries.php';
 		?>

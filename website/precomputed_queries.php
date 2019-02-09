@@ -2,13 +2,10 @@
 
 <html>
 
-	<head>
- 		<title>Quorum DB</title>
-		<meta charset="utf-8" />
-	</head>
+	<?php include 'includes/head.php' ?>
 
 	<body>
-		<?php include 'includes/layout_head.php' ?>
+		<?php include 'includes/banner_and_menu.php' ?>
 
  		<div>
 		<?php

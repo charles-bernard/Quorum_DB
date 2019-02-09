@@ -24,18 +24,19 @@
 		// Column names whose values are numbers are not considered
 		// because the filter query is based on string regexp
 		if(basename($_SERVER['PHP_SELF']) == "index.php" || basename($_SERVER['PHP_SELF']) == "index.php#") {
+			$bgcol = "Teal";
 			// first column filtering and sorting is only enabled for table species
 			if($curr_table == "species") {
 				$i = 0;
 			} else {
 				echo('<tr>');
-				echo('<td bgcolor="Cornsilk">filter by</td>');
+				echo('<td bgcolor="' . $bgcol . '"><font color="White">filter by</font></td>');
 				$i = 1;
 			}
 			for($i=$i;$i < $n_fields;$i++) {
 				$column_name = pg_field_name($query_result, $i);
 				if($column_name != "pubmed_id" and $column_name != "ncbi_tax_id") {
-					echo('<td bgcolor="Cornsilk">');
+					echo('<td bgcolor="' . $bgcol . '">');
 					echo('<form action="" method="post">');
 					echo('<input type="hidden" name="filtered_col" value="' . $column_name .'">');
 					echo('<input type="hidden" name="chosen_table" value="' . $curr_table .'">');
@@ -49,7 +50,7 @@
 					echo('</form>');
 					echo('</td>');
 				} else {
-					echo('<td bgcolor="Cornsilk"></td>');
+					echo('<td bgcolor="' . $bgcol . '"></td>');
 				}
 			}
 			echo('</tr>');
@@ -102,9 +103,9 @@
 		$k = 1;
 		while ($record = pg_fetch_row($query_result)) {
 			if ($k % 2 == 0) {
-				echo('<tr>');
+				echo('<tr bgcolor="White">');
 			} else {
-				echo('<tr bgcolor="WhiteSmoke">');
+				echo('<tr bgcolor="AliceBlue">');
 			}
 			for($i=0;$i<$n_fields;$i++) {
 				echo('<td>');
