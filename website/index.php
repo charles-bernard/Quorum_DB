@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 
-<?php    
-if(isset($_POST['chosen_table'])){
+<?php   
+// Examine arg values 
+if(isset($_POST['chosen_table'])) {
  	$curr_table = $_POST['chosen_table'];
 } else if((!$curr_table)) {
+	// qs_summary view is the default table
 	$curr_table = "qs_summary";
 }
-if(isset($_POST['filtered_col'])){
+
+if(isset($_POST['filtered_col'])) {
 	$filtered_col = $_POST['filtered_col'];
 } else {
 	$filtered_col = false;
 }
-if(isset($_POST['filter_val'])){
+
+if(isset($_POST['filter_val'])) {
 	$filter_val = $_POST['filter_val'];
 } else {
 	$filter_val = false;
+}
+
+if(isset($_POST['do_sort_asc'])) {
+	$sort = "ASC";
+} elseif (isset($_POST['do_sort_desc'])) {
+	$sort = "DESC";
+} else {
+	$sort = false;
 }
 ?>
 
@@ -30,60 +42,50 @@ if(isset($_POST['filter_val'])){
 
 		<div>
 			<p>
-			Select the table you want to display
-			<form action="" method="post">
-				<select id="chosen_table" name="chosen_table">
-					<option value="qs_summary">QS_systems</option>
-					<option value="gene">Gene</option>
-					<option value="reference">Reference</option>
-					<option value="signal">Signal</option>
-					<option value="species">Species</option>
-				</select>
-				<input type="submit" value="Display the table"/>
-			</form>
+				<form action="" method="post">
+					<select id="chosen_table" name="chosen_table">
+						<option value="qs_summary">QS_systems</option>
+						<option value="gene">Gene</option>
+						<option value="reference">Reference</option>
+						<option value="signal">Signal</option>
+						<option value="species">Species</option>
+					</select>
+					<input type="submit" value="Display the table"/>
+				</form>
 			</p>
-
 		</div>
 
-		<form action="" method="post">
-			
-		</form>
-
  		<div>
-		<?php
-			include 'includes/display_query.php';
+			<?php
+				include 'includes/display_query.php';
 
-			// Connect DB
-			$dbconn = pg_connect('host=localhost dbname=quorum_db user=visitor password=toto');
-			if (!$dbconn) {
-				echo('An error occurred.\n');
-				exit;
-			}
-
-			if($filter_val) {
-				if($curr_table == "qs_summary") {
-					$result = pg_query($dbconn, 
-						"SELECT * FROM {$curr_table}
-						WHERE {$filtered_col} ~ '(?i){$filter_val}'");
-				} else {
-					$result = pg_query($dbconn, 
-						"SELECT * FROM {$curr_table} 
-						WHERE {$filtered_col} ~ '(?i){$filter_val}'
-						ORDER BY 1, 2");
+				// Connect DB
+				$dbconn = pg_connect('host=localhost dbname=quorum_db user=visitor password=toto');
+				if (!$dbconn) {
+					echo('An error occurred.\n');
+					exit;
 				}
-			} else {
-				if($curr_table == "qs_summary") {
-					$result = pg_query($dbconn, "SELECT * FROM {$curr_table}");
+
+				// Determine how to query the current table
+				if($filter_val) {
+					$where_statement = " WHERE {$filtered_col} ~ '(?i){$filter_val}'";
 				} else {
-					$result = pg_query($dbconn, 
-						"SELECT * FROM {$curr_table} ORDER BY 1, 2");
+					$where_statement = "";
 				}
-			}
+				if($sort) {
+					$order_statement = " ORDER BY {$filtered_col} {$sort}";
+				} else if($curr_table != "qs_summary") {
+					$order_statement = " ORDER BY 1, 2";
+				} else {
+					$order_statement = "";
+				}
+				$query = ("SELECT * FROM " . $curr_table . $where_statement . $order_statement . ";");
 
-			print_table($result, $curr_table);
-			pg_free_result($result);
-
-		?>
+				// Execute the query, display the result and free it.
+				$result = pg_query($dbconn, $query);
+				print_table($result, $curr_table);
+				pg_free_result($result);
+			?>
 		</div>
 
 	<hr><br>

@@ -27,17 +27,17 @@
 			<ul>
 				<li> 
 					<form action="#" method="post">
-						<button name="do_query_1">List all signal families</button>
+						<button name="do_query_1" style="width:300px">List all signal families</button>
 					</form>
 				</li>
 				<li> 
 					<form action="#" method="post">
-						<button name="do_query_2">List entries with interspecies QS</button>
+						<button name="do_query_2" style="width:300px">List entries with interspecies QS</button>
 					</form>
 				</li>
 				<li> 
 					<form action="#" method="post">
-						<button name="do_query_3">List orphan synthases and receptors</button>
+						<button name="do_query_3" style="width:300px">List orphan synthases and receptors</button>
 					</form>
 				</li>
 			</ul>
