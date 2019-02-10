@@ -133,7 +133,7 @@ This file is the primordial input from which Quorum_DB toolkit will populate all
 Execute the ```fill_db.py``` as follows:
 
 ```bash
-python -u <your_username> -d quorum_db -i initial_table.template.csv -o ../../website/data
+python fill_db.py -u <your_username> -d quorum_db -i initial_table.template.csv -o ../../website/data
 ```
 
 The output ```data/``` directory will contain the csv files used to populate the db as well as the fetched fasta sequences corresponding to the gene or protein entries.
