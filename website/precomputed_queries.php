@@ -7,19 +7,6 @@
 	<body>
 		<?php include 'includes/banner_and_menu.php' ?>
 
- 		<div>
-		<?php
-			include 'includes/display_query.php';
-			include 'includes/queries.php';
-
-			// Connect DB
-			$dbconn = pg_connect('host=localhost dbname=quorum_db user=visitor password=toto');
-			if (!$dbconn) {
-				echo('An error occurred.\n');
-				exit;
-			}
-		?>
-
 		<div>
 			<ul>
 				<li> 
@@ -40,30 +27,41 @@
 			</ul>
 		</div>
 
-		<?php
-			if(isset($_POST['do_query_1'])){
-				echo('<hr>');
-				echo('<h3> Signal Families </h3>');
- 				$result = list_all_signal_families($dbconn);
-			} elseif(isset($_POST['do_query_2'])) {
-				echo('<hr>');
-				echo('<h3> Entries with interspecies QS </h3>');
- 				$result = list_interspecies_qs($dbconn);
-			} elseif(isset($_POST['do_query_3'])) {
-				echo('<hr>');
-				echo('<h3> Entries with synthase(s) whose signal cognate receptor is not present or not yet characterized in the species</h3>');
-				$result = list_orphan_module($dbconn, 'synthase');
+		<div>
+			<?php
+				include 'includes/display_query.php';
+				include 'includes/queries.php';
+
+				// Connect DB
+				$dbconn = pg_connect('host=localhost dbname=quorum_db user=visitor password=toto');
+				if (!$dbconn) {
+					echo('An error occurred.\n');
+					exit;
+				}
+				if(isset($_POST['do_query_1'])){
+					echo('<hr>');
+					echo('<h3> Signal Families </h3>');
+	 				$result = list_all_signal_families($dbconn);
+				} elseif(isset($_POST['do_query_2'])) {
+					echo('<hr>');
+					echo('<h3> Entries with interspecies QS </h3>');
+	 				$result = list_interspecies_qs($dbconn);
+				} elseif(isset($_POST['do_query_3'])) {
+					echo('<hr>');
+					echo('<h3> Entries with synthase(s) whose signal cognate receptor is not present or not yet characterized in the species</h3>');
+					$result = list_orphan_module($dbconn, 'synthase');
+					print_table($result);
+					pg_free_result($result);
+					echo('<hr>');
+					echo('<h3> Entries with receptor whose signal cognate synthase(s) are not present or not yet characterized in the species</h3>');
+					$result = list_orphan_module($dbconn, 'receptor');
+				}
 				print_table($result);
 				pg_free_result($result);
-				echo('<hr>');
-				echo('<h3> Entries with receptor whose signal cognate synthase(s) are not present or not yet characterized in the species</h3>');
-				$result = list_orphan_module($dbconn, 'receptor');
-			}
-			print_table($result);
-			pg_free_result($result);
-		?>
+			?>
 		</div>
 
+	<br>
 	</body>
 
 </html>
