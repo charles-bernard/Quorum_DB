@@ -64,7 +64,6 @@
 		?>
 		</div>
 
-	<hr><br>
 	</body>
 
 </html>

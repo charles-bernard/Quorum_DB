@@ -85,7 +85,7 @@ if(isset($_POST['do_sort_asc'])) {
 			?>
 		</div>
 
-	<hr><br>
+	<br>
 	</body>
 
 </html>

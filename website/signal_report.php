@@ -103,7 +103,7 @@ if(isset($_GET['val'])){
 			</td>
 		</table>
 
-	<hr><br>
+	<br>
 	</body>
 
 </html>
