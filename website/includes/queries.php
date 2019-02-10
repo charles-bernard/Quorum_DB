@@ -114,14 +114,20 @@ function signal_id_2_seq($dbconn, $query_signal_id) {
 			function.species_name, 
 			function.gene_name,
 			function.function,
+			gene.gene_id AS \"gene/assembly_id\",
+			gene.gene_coordinates,
 			sequence.seq_type,
 			sequence.fa_path 
 		FROM 
 			function
 			LEFT JOIN sequence 
 			ON
-				function.gene_name = sequence.gene_name
-				AND function.species_name = sequence.species_name 
+				(function.gene_name = sequence.gene_name
+				AND function.species_name = sequence.species_name)
+			LEFT JOIN gene
+			ON
+				(function.gene_name = gene.gene_name
+				AND function.species_name = gene.species_name)
 		WHERE function.signal_id = '{$query_signal_id}' 
 		AND bio_process_id = 1
 		AND reference_id != 0
