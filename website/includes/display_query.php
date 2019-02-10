@@ -1,7 +1,7 @@
 <?php
 
 	function print_table($query_result, $curr_table) {
-		echo('<table border=1 frame=void rules=all>');
+		echo('<table border=2 frame=box rules=groups>');
 
 		// this return the number of fields in the queried table
 		$n_fields = pg_num_fields($query_result);
@@ -105,7 +105,7 @@
 			if ($k % 2 == 0) {
 				echo('<tr bgcolor="White">');
 			} else {
-				echo('<tr bgcolor="AliceBlue">');
+				echo('<tr bgcolor="#E8E8E8">');
 			}
 			for($i=0;$i<$n_fields;$i++) {
 				echo('<td>');
