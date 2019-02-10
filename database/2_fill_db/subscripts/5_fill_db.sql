@@ -3,7 +3,7 @@
 
 /* LEVEL O TABLES */
 \COPY bio_process (bio_process_id, bio_process) FROM 'input_tables/bio_process.csv' WITH DELIMITER E'\t' NULL AS '' CSV HEADER;
-\COPY reference (reference_id, pubmed_id, doi, isbn) FROM 'input_tables/reference.csv' WITH DELIMITER E'\t' NULL AS '' CSV HEADER;
+\COPY reference (reference_id, pubmed_id, doi, isbn, publi_date, journal, authors) FROM 'input_tables/reference.csv' WITH DELIMITER E'\t' NULL AS '' CSV HEADER;
 \COPY species (species_name, ncbi_tax_id, superkingdom, phylum, class, order_, full_lineage, full_lineage_ranks) FROM 'input_tables/species.csv' WITH DELIMITER E'\t' NULL AS '' CSV HEADER;
 
 /* LEVEL 1 TABLES */

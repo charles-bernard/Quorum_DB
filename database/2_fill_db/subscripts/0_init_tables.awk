@@ -9,7 +9,7 @@ BEGIN {
 	bioprocess_table = output_dir "/bio_process.csv";
 	function_table = output_dir "/function.csv";
 	gene_table = output_dir "/gene.csv";
-	reference_table = output_dir "/reference.csv";
+	reference_table = output_dir "/UNCOMPLETE_reference.csv";
 	sequence_table = output_dir "/UNCOMPLETE_sequence.csv";
 	signal_table = output_dir "/signal.csv";
 	species_table = output_dir "/UNCOMPLETE_species.csv";

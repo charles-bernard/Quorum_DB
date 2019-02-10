@@ -140,7 +140,10 @@ function signal_id_2_ref($dbconn, $query_signal_id) {
 		"SELECT DISTINCT ON (reference.reference_id)
 			reference.reference_id,
 			reference.pubmed_id,
-			reference.doi
+			reference.doi,
+			reference.publi_date,
+			reference.journal,
+			reference.authors
 		FROM
 			reference
 		LEFT JOIN function

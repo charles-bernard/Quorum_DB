@@ -34,7 +34,9 @@ subprocess.call(['bash', 'subscripts/2_substitute_taxid_by_taxname.sh',
                  input_tables_dir])
 subprocess.call(['bash', 'subscripts/3_fetch_fasta_sequences_and_fill_sequence_table.sh',
                  args.out_dir])
+subprocess.call(['bash', 'subscripts/4_fetch_publication_info.sh',
+                 input_tables_dir])
 subprocess.call(['psql', '-U', args.user_name, '-d', args.db_name, '-v', 'dir=' + args.out_dir,
-                 '-f', 'subscripts/4_fill_db.sql'])
-subprocess.call(['bash', 'subscripts/5_insert_fasta_content_into_sequence_table.sh',
+                 '-f', 'subscripts/5_fill_db.sql'])
+subprocess.call(['bash', 'subscripts/6_insert_fasta_content_into_sequence_table.sh',
                  args.db_name, args.user_name])

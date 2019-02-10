@@ -29,19 +29,19 @@ BEGIN {
 	rev["C"] = "G";
 	rev["G"] = "C";
 
-	split(coord, coord_fields, "[-_]");
-	action_letter = coord_fields[1];
-	if(action_letter == "N") {
+	split(coord, coord_fields, "[:_]");
+	strand = coord_fields[1];
+	if(strand == "+") {
 		start = coord_fields[2];
 		end = coord_fields[3];
-	} else if(action_letter == "C") {
+	} else if(strand == "C") {
 		start = coord_fields[3];
 		end = coord_fields[2];
 	}
 }
 
 # print header
-NR == 1 { print $0 " (" start "-" end ")"; }
+NR == 1 { print $0 "strand: " strand " (" start "-" end ")"; }
 
 # concatenate genome or whatsoever sequence
 NR > 1 { s = s $0; }
@@ -50,7 +50,7 @@ NR > 1 { s = s $0; }
 END { 
 	seq = substr(s, start, end-start+1);
 
-	if(action_letter == "C") {
+	if(strand == "-") {
 		seq = get_complementary_seq(seq)
 	}
 

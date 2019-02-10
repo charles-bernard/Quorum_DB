@@ -162,6 +162,7 @@ function fill_seq {
 declare -A ASSEMBLY_DICT
 FETCH_STDERR=`mktemp`;
 
+echo "FETCH CDS AND PROTEIN SEQUENCES";
 for(( i=0; i<$NB_GENES; i++ )); do
 	echo "fetch entry n°""$((i+1))""/""$NB_GENES"": ""${GENE_NAME[$i]}"" gene" "[ ""${SPECIES_NAME[$i]}" "]";
 
