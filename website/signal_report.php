@@ -101,7 +101,8 @@ if(isset($_GET['val'])){
 			?>
 			</tr>
 		</table>
-		
+
+	<br>	
 	<br>
 	</body>
 

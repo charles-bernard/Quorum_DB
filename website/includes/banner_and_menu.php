@@ -10,14 +10,14 @@
 	</tr>
 </table>
 
-<nav id="menu">        
+<nav id="menu">
 	<div class="element_menu">
 		<table width="100%" style="background-color: #ff3333" border=2>
-        	<tr>
-	            <td width="8%"><a href="index.php"><b><font color="white">Home</font></b></a></td>
+			<tr>
+				<td width="8%"><a href="index.php"><b><font color="white">Home</font></b></a></td>
 				<td width="92%"><a href="precomputed_queries.php"><b><font color="white">Pre-computed queries</font></b></a></td>
-        	</tr>
-        </table>
-    </div>    
+			</tr>
+		</table>
+	</div>
 </nav>
 <br>
