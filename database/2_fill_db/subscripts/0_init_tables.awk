@@ -40,7 +40,7 @@ BEGIN {
 	pubmed_id = $17;
 	signal_id = $18;
 	signal_info = $19;
-	structure_img = $20;
+	structure_img = "img/" $20;
 }
 
 NR == 1 {
@@ -56,7 +56,7 @@ NR == 1 {
 	print signal_id "\t" signal_supercategory "\t" signal_family \
 		"\t" signal_trivial_name "\t" signal_systematic_name \
 		"\t" signal_chemical_formula "\t" peptide_sequence \
-		"\t" structure_img "\t" signal_info "\t" "qs_system" > signal_table;
+		"\t" "structure_img" "\t" signal_info "\t" "qs_system" > signal_table;
 	print ncbi_tax_id > species_table;
 
 
@@ -143,7 +143,7 @@ NR > 1 {
 			preline_signal[signal_id] = signal_id "\t" signal_supercategory \
 			"\t" signal_family "\t" signal_trivial_name \
 			"\t" signal_systematic_name "\t" signal_chemical_formula \
-			"\t" peptide_sequence "\timg/" structure_img "\t" signal_info
+			"\t" peptide_sequence "\t" structure_img "\t" signal_info
 
 			n_signal++;
 		}
