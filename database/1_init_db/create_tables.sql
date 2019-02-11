@@ -23,7 +23,10 @@ CREATE TABLE reference (
 	reference_id SERIAL PRIMARY KEY,
 	pubmed_id INT,
 	doi VARCHAR,
-	isbn VARCHAR
+	isbn VARCHAR,
+	publi_date VARCHAR,
+	journal VARCHAR,
+	authors TEXT
 );
 
 CREATE TABLE species (
