@@ -88,7 +88,7 @@ CREATE TABLE signal (
 	signal_systematic_name VARCHAR,
 	signal_chemical_formula VARCHAR,
 	peptide_sequence VARCHAR,
-	structure_img BYTEA,
+	structure_img VARCHAR,
 	signal_info TEXT,
 	qs_system VARCHAR
 );
