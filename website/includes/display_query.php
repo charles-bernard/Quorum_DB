@@ -142,9 +142,10 @@
 					}
 				} else if($is_img[$i]) {
 					if(!empty($record[$i])) {
+						echo('<img src="' . $record[$i] . '">');
 						// $toto = $record[$i];
 						// echo(str_replace($toto, '+'));
-						echo('<img src="data:image/png;base64,' . $record[$i] . '">');
+						// echo('<img src="data:image/png;base64,' . $record[$i] . '">');
 						// header('Content-type: image/png');
 						// echo $record[$i];
 					}

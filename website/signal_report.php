@@ -94,8 +94,7 @@ if(isset($_GET['val'])){
 			<tr>
 			<?php
 				$result = pg_query($dbconn, 
-					"SELECT signal_info AS Additional_Information,
-					replace(ENCODE(structure_img, 'base64'), E'\n', '') AS \"structure_img\"
+					"SELECT signal_info AS Additional_Information, structure_img
 					FROM signal WHERE signal_id='{$query_signal_id}'");
 				print_table($result);
 				pg_free_result($result);
