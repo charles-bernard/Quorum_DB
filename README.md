@@ -74,7 +74,7 @@ psql
 Then create the role corresponding to your username
 
 ```bash
-CREATE ROLE <your_username> WITH CREATEDB, CREATEROLE;
+CREATE ROLE <your_username> WITH LOGIN CREATEDB CREATEROLE;
 CREATE DATABASE <your_username>;
 ```
 
@@ -196,7 +196,7 @@ Then create role visitor
 ```psql```
 
 ```psql
-CREATE ROLE visitor WITH LOGIN, PASSWORD 'toto';
+CREATE ROLE visitor WITH LOGIN PASSWORD 'toto';
 CREATE DATABASE visitor;
 GRANT CONNECT ON DATABASE quorum_db TO visitor;
 ```
