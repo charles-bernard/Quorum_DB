@@ -116,8 +116,9 @@ function signal_id_2_seq($dbconn, $query_signal_id) {
 			function.function,
 			gene.gene_id AS \"gene/assembly_id\",
 			gene.gene_coordinates,
+			gene.prot_id,
 			sequence.seq_type,
-			sequence.fa_path 
+			sequence.fa_path AS \"fasta\"
 		FROM 
 			function
 			LEFT JOIN sequence 
