@@ -14,6 +14,7 @@
 		$species_link = array();
 		$fapath_link = array();
 		$align = array();
+		$is_img = array();
 
 		for($i=0;$i < $n_fields;$i++) {
 			$column_name = pg_field_name($query_result, $i);
@@ -53,6 +54,12 @@
 				array_push($align, "left");
 			} else {
 				array_push($align, "center");
+			}
+
+			if($column_name == "structure_img") {
+				array_push($is_img, true);
+			} else {
+				array_push($is_img, false);
 			}
 		}
 
@@ -132,6 +139,14 @@
 					if($record[$i]) {
 						$fa_file = basename($record[$i]).PHP_EOL;
 						echo('<a href=data/sequences/publi_reference/' . $record[$i-1] . '/' . $fa_file . ' target="_blank"> Open Fasta </a>');
+					}
+				} else if($is_img[$i]) {
+					if(!empty($record[$i])) {
+						// $toto = $record[$i];
+						// echo(str_replace($toto, '+'));
+						echo('<img src="data:image/png;base64,' . $record[$i] . '">');
+						// header('Content-type: image/png');
+						// echo $record[$i];
 					}
 				} else {
 					echo('<font face=' . $font_array[$i] . '>');

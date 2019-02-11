@@ -28,32 +28,6 @@ if(isset($_GET['val'])){
 			}
 		?>
 
-		<br>
-		<table border = 0>
-			<tr>
-			<h2> Signal Characteristics </h2>
-			<?php
-				$result = pg_query($dbconn, 
-					"SELECT signal_id, signal_supercategory, signal_family, signal_trivial_name,  	
-					signal_systematic_name, signal_chemical_formula, peptide_sequence, structure_img
-					FROM signal WHERE signal_id='{$query_signal_id}'");
-				print_table($result);
-				pg_free_result($result);
-			?>
-			</tr>
-			<br>
-			<tr>
-			<?php
-				$result = pg_query($dbconn, 
-					"SELECT signal_info AS Additional_Information
-					FROM signal WHERE signal_id='{$query_signal_id}'");
-				print_table($result);
-				pg_free_result($result);
-			?>
-			</tr>
-		</table>
-		
-		<br>
 		<table border = 0>
 			<td>
 			<h2> Reference(s) </h2>
@@ -103,6 +77,32 @@ if(isset($_GET['val'])){
 			</td>
 		</table>
 
+		<br>
+		<table border = 0>
+			<tr>
+			<h2> Signal Characteristics </h2>
+			<?php
+				$result = pg_query($dbconn, 
+					"SELECT signal_id, signal_supercategory, signal_family, signal_trivial_name,  	
+					signal_systematic_name, signal_chemical_formula, peptide_sequence
+					FROM signal WHERE signal_id='{$query_signal_id}'");
+				print_table($result);
+				pg_free_result($result);
+			?>
+			</tr>
+			<br>
+			<tr>
+			<?php
+				$result = pg_query($dbconn, 
+					"SELECT signal_info AS Additional_Information,
+					replace(ENCODE(structure_img, 'base64'), E'\n', '') AS \"structure_img\"
+					FROM signal WHERE signal_id='{$query_signal_id}'");
+				print_table($result);
+				pg_free_result($result);
+			?>
+			</tr>
+		</table>
+		
 	<br>
 	</body>
 
