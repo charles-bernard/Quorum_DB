@@ -141,7 +141,7 @@
 			if ($k % 2 == 0) {
 				echo('<tr bgcolor="White">');
 			} else {
-				echo('<tr bgcolor="#E8E8E8">');
+				echo('<tr bgcolor="Gainsboro">');
 			}
 			for($i=0;$i<$n_fields;$i++) {
 				echo('<td align="' . $align[$i] . '">');

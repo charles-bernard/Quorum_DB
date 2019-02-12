@@ -40,7 +40,11 @@ BEGIN {
 	pubmed_id = $17;
 	signal_id = $18;
 	signal_info = $19;
-	structure_img = "img/" $20;
+	if($20) {
+		structure_img = "img/" $20;
+	} else {
+		structure_img = "";
+	}
 }
 
 NR == 1 {
