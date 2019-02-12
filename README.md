@@ -34,13 +34,20 @@ ncbi.update_taxonomy_database()
 
 Extract it and execute the setup.sh script
 
-```bash
-./edirect/setup.sh
-````
-
 You may need to place the edirect/ directory inside your $PATH
 
-## 3. Install required packages for installing a local webserver
+
+```bash
+./edirect/setup.sh
+```
+
+## 3. Install openbabel to produce vectorial images of chemical structure from SMILES strings
+
+```bash
+sudo apt-get install openbabel
+```
+
+## 4. Install required packages for installing a local webserver
 
 Update your machine
 
