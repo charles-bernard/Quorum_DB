@@ -23,20 +23,22 @@ args = parser.parse_args()
 
 # Step 1
 # partition initial tab to db tables
-input_tables_dir = os.path.join(args.out_dir, "input_tables")
+input_tables_dir = os.path.join(os.path.abspath(args.out_dir), "input_tables")
 if not os.path.exists(input_tables_dir):
     os.makedirs(input_tables_dir)
 
 subprocess.call(['awk', '-v', 'output_dir=' + input_tables_dir,
                  '-f', 'subscripts/0_init_tables.awk', args.input_tab])
-subprocess.call(['python', 'subscripts/1_fill_species.py', input_tables_dir])
+subprocess.call(['python3', 'subscripts/1_fill_species.py', input_tables_dir])
 subprocess.call(['bash', 'subscripts/2_substitute_taxid_by_taxname.sh',
                  input_tables_dir])
 subprocess.call(['bash', 'subscripts/3_fetch_fasta_sequences_and_fill_sequence_table.sh',
                  args.out_dir])
 subprocess.call(['bash', 'subscripts/4_fetch_publication_info.sh',
                  input_tables_dir])
+subprocess.call(['bash', 'subscripts/5_smiles_to_svg.sh',
+                 input_tables_dir])
 subprocess.call(['psql', '-U', args.user_name, '-d', args.db_name, '-v', 'dir=' + args.out_dir,
-                 '-f', 'subscripts/5_fill_db.sql'])
-subprocess.call(['bash', 'subscripts/6_insert_fasta_content_into_sequence_table.sh',
+                 '-f', 'subscripts/6_fill_db.sql'])
+subprocess.call(['bash', 'subscripts/7_insert_fasta_content_into_sequence_table.sh',
                  args.db_name, args.user_name])

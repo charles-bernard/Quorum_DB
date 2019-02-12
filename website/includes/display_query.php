@@ -163,10 +163,11 @@
 					}
 				} else if($is_img[$i]) {
 					if($record[$i]) {
+						$img_file = basename($record[$i]).PHP_EOL;
 						if($curr_table == "") {
-							echo('<img src="' . $record[$i] . '">');
+							echo('<img src="data/img/' . $img_file . '">');
 						} else {
-							echo('<img src="' . $record[$i] . '" height="100" width="150">');
+							echo('<img src="data/img/' . $img_file . '" height="150" width="150">');
 						}
 					} 
 				} else if($is_coord[$i]) {

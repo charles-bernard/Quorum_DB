@@ -11,7 +11,7 @@ BEGIN {
 	gene_table = output_dir "/gene.csv";
 	reference_table = output_dir "/UNCOMPLETE_reference.csv";
 	sequence_table = output_dir "/UNCOMPLETE_sequence.csv";
-	signal_table = output_dir "/signal.csv";
+	signal_table = output_dir "/UNCOMPLETE_signal.csv";
 	species_table = output_dir "/UNCOMPLETE_species.csv";
 	
 	b = 1;
@@ -22,11 +22,11 @@ BEGIN {
 {
 	# FIELD NAMES
 	signal_supercategory = $1;
-	signal_family = $2.
+	signal_family = $2;
 	signal_trivial_name = $3;
 	signal_systematic_name = $4;
-	signal_chemical_formula = $5;
-	peptide_sequence = $6;
+	peptide_sequence = $5;
+	smiles = $6;
 	ncbi_tax_id = $7;
 	taxon_name = $8;
 	gene_name = $9;
@@ -40,11 +40,6 @@ BEGIN {
 	pubmed_id = $17;
 	signal_id = $18;
 	signal_info = $19;
-	if($20) {
-		structure_img = "img/" $20;
-	} else {
-		structure_img = "";
-	}
 }
 
 NR == 1 {
@@ -59,15 +54,15 @@ NR == 1 {
 	print ncbi_tax_id "\t" gene_name "\t" "seq_type" > sequence_table;
 	print signal_id "\t" signal_supercategory "\t" signal_family \
 		"\t" signal_trivial_name "\t" signal_systematic_name \
-		"\t" signal_chemical_formula "\t" peptide_sequence \
-		"\t" "structure_img" "\t" signal_info "\t" "qs_system" > signal_table;
+		"\t" smiles "\t" peptide_sequence \
+		"\t" signal_info "\t" "qs_system" > signal_table;
 	print ncbi_tax_id > species_table;
 
 
 	# INIT LINES
 	print bio_process_id["quorum sensing"] "\t" "quorum sensing" > bioprocess_table
 	print "0\t\t\t" > reference_table;
-	print "0\t\t\t\t\t\t\t\t\t" > signal_table;
+	print "0\t\t\t\t\t\t\t\t" > signal_table;
 
 	n_signal = 0;
 }
@@ -146,8 +141,8 @@ NR > 1 {
 
 			preline_signal[signal_id] = signal_id "\t" signal_supercategory \
 			"\t" signal_family "\t" signal_trivial_name \
-			"\t" signal_systematic_name "\t" signal_chemical_formula \
-			"\t" peptide_sequence "\t" structure_img "\t" signal_info
+			"\t" signal_systematic_name "\t" smiles \
+			"\t" peptide_sequence "\t" signal_info
 
 			n_signal++;
 		}

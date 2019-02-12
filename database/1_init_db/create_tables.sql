@@ -86,11 +86,11 @@ CREATE TABLE signal (
 	signal_family VARCHAR,
 	signal_trivial_name VARCHAR,
 	signal_systematic_name VARCHAR,
-	signal_chemical_formula VARCHAR,
+	smiles VARCHAR,
 	peptide_sequence VARCHAR,
-	structure_img VARCHAR,
 	signal_info TEXT,
-	qs_system VARCHAR
+	qs_system VARCHAR,
+	structure_img VARCHAR
 );
 
 
