@@ -54,7 +54,6 @@ CREATE TABLE environment (
 	env_id SERIAL PRIMARY KEY,
 	location VARCHAR,
 	sampling_project VARCHAR,
-	properties VARCHAR,
 	reference_id INT REFERENCES reference ON UPDATE CASCADE
 );
 
@@ -86,11 +85,11 @@ CREATE TABLE signal (
 	signal_family VARCHAR,
 	signal_trivial_name VARCHAR,
 	signal_systematic_name VARCHAR,
-	smiles VARCHAR,
-	peptide_sequence VARCHAR,
-	signal_info TEXT,
 	qs_system VARCHAR,
-	structure_img VARCHAR
+	structure_img VARCHAR,
+	peptide_sequence VARCHAR,
+	smiles VARCHAR,
+	signal_info TEXT	
 );
 
 
@@ -118,6 +117,12 @@ CREATE TABLE environment_community (
 	env_id INT REFERENCES environment ON DELETE CASCADE ON UPDATE CASCADE,
 	species_name CHAR(30) REFERENCES species ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (env_id, species_name)
+);
+
+CREATE TABLE environment_properties (
+	env_id INT REFERENCES environment ON DELETE CASCADE ON UPDATE CASCADE,
+	env_property VARCHAR,
+	PRIMARY KEY (env_id, env_property)
 );
 
 CREATE TABLE function (
@@ -161,6 +166,19 @@ CREATE TABLE pathway_genes (
 	FOREIGN KEY (pathway_id) REFERENCES pathway (pathway_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (species_name, gene_name) REFERENCES gene (species_name, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY(pathway_id, species_name, gene_name)
+);
+
+CREATE TABLE regulated_by (
+	target_species VARCHAR,
+	target_gene VARCHAR,
+	regulator_species VARCHAR,
+	regulator_gene VARCHAR,
+	regulation_type VARCHAR CHECK (
+		(regulation_type='positive') or
+		(regulation_type='negative')),
+	FOREIGN KEY (target_species, target_gene) REFERENCES gene (species_name, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (regulator_species, regulator_gene) REFERENCES gene (species_name, gene_name) ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY (target_species, target_gene, regulator_species, regulator_gene)
 );
 
 CREATE TABLE sequence (

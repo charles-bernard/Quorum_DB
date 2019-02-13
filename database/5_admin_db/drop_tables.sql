@@ -5,9 +5,11 @@ DROP VIEW qs_summary;
 DROP TABLE analysed_taxons;
 DROP TABLE composite_gene;
 DROP TABLE environment_community;
+DROP TABLE environment_properties;
 DROP TABLE function;
 DROP TABLE gene_history;
 DROP TABLE pathway_genes;
+DROP TABLE regulated_by;
 DROP TABLE sequence;
 
 /* LEVEL 1 TABLES */
