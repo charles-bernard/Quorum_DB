@@ -84,10 +84,10 @@ CREATE TABLE signal (
 		(signal_supercategory='signaling molecule')),
 	signal_family VARCHAR,
 	signal_trivial_name VARCHAR,
-	signal_systematic_name VARCHAR,
 	qs_system VARCHAR,
 	structure_img VARCHAR,
 	peptide_sequence VARCHAR,
+	signal_systematic_name VARCHAR,
 	smiles VARCHAR,
 	signal_info TEXT	
 );
