@@ -82,13 +82,13 @@ if(isset($_GET['val'])){
 			<?php
 				$result = pg_query($dbconn, 
 					"SELECT signal_id, signal_supercategory, signal_family, signal_trivial_name,  	
-					signal_systematic_name, signal_chemical_formula, peptide_sequence
+					signal_systematic_name, peptide_sequence, smiles
 					FROM signal WHERE signal_id='{$query_signal_id}'");
 				print_table($result);
 				pg_free_result($result);
+				echo('<br>');
 			?>
 			</tr>
-			<br>
 			<tr>
 			<?php
 				$result = pg_query($dbconn, 

@@ -119,7 +119,7 @@
 					echo('<input type="hidden" name="filtered_col" value="' . $column_name .'">');
 					echo('<input type="hidden" name="chosen_table" value="' . $curr_table .'">');
 					echo('<table><tr>');
-					echo('<td><input type="text" name="filter_val" style="width:90px"></td>');
+					echo('<td><input type="text" name="filter_val" style="width:88px"></td>');
 					echo('<td><button name="do_sort_desc">&#8593;</button></td>');
 					echo('</tr><tr>');
 					echo('<td><button name="do_filter" style="width:105px">Filter</button></td>');
@@ -172,12 +172,7 @@
 					} 
 				} else if($is_coord[$i]) {
 					if($record[$i]) {
-						list($strand, $start, $end) = preg_split('/[_:]/', $record[$i]);
-						if($strand == "-") {
-							$tmp = $end;
-							$end = $start;
-							$start = $tmp;
-						}
+						list($start, $end, $strand) = preg_split('/:/', $record[$i]);
 						echo('<a href="http://www.ncbi.nlm.nih.gov/nuccore/' . $record[$i-1] . '?report=graph&from=' . $start . '&to=' . $end);
 						echo('" target="_blank" title="Look gene synteny">' . $record[$i] . '</a>');
 					}
