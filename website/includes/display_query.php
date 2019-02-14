@@ -22,7 +22,7 @@
 		for($i=0;$i < $n_fields;$i++) {
 			$column_name = pg_field_name($query_result, $i);
 
-			if($column_name == "fa_seq") {
+			if($column_name == "fa_seq" or $column_name == "smiles" or $column_name == "peptide_sequence") {
 				array_push($font_array, "Courier New");
 			} else {
 				array_push($font_array, "\"\"");
@@ -165,7 +165,7 @@
 					if($record[$i]) {
 						$img_file = basename($record[$i]).PHP_EOL;
 						if($curr_table == "") {
-							echo('<img src="data/img/' . $img_file . '">');
+							echo('<img src="data/img/' . $img_file . '" height="500" width="500">');
 						} else {
 							echo('<img src="data/img/' . $img_file . '" height="150" width="150">');
 						}
