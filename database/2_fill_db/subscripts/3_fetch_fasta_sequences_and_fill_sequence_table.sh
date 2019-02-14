@@ -11,10 +11,8 @@ function create_dir {
 }
 SEQ_CDS_DIR="$WORKING_DIR"/"sequences"/"publi_reference"/"cds";
 SEQ_PROT_DIR="$WORKING_DIR"/"sequences"/"publi_reference"/"protein";
-ASSEMBLY_DIR="$WORKING_DIR"/"sequences"/"publi_reference"/"assembly";
 create_dir "$SEQ_CDS_DIR";
 create_dir "$SEQ_PROT_DIR";
-create_dir "$ASSEMBLY_DIR";
 
 function check_file {
 	local FILE="$1";
@@ -41,11 +39,6 @@ for(( i=0; i<$NB_GENES; i++ )); do
 	GENE_ID[$i]=`awk -F "\t" -v i=$((i+2)) 'NR == i { print $3; }' "$GENE_TABLE"`;
 	DB_GENE_ID[$i]=`awk -F "\t" -v i=$((i+2)) 'NR == i { print $4; }' "$GENE_TABLE"`;
 	GENE_COORD[$i]=`awk -F "\t" -v i=$((i+2)) 'NR == i { print $5; }' "$GENE_TABLE"`;
-	if [[ "${GENE_COORD[$i]}" != "" ]]; then
-		ASSEMBLY[$i]="$ASSEMBLY_DIR"/"${GENE_ID[$i]}""__""$STD_SPECIES_NAME"".fasta";
-	else
-		ASSEMBLY[$i]="";
-	fi
 	CDS_FA[$i]="$SEQ_CDS_DIR"/"${GENE_NAME[$i]}""__""$STD_SPECIES_NAME"".fasta";
 	PROT_ID[$i]=`awk -F "\t" -v i=$((i+2)) 'NR == i { print $6; }' "$GENE_TABLE"`;
 	DB_PROT_ID[$i]=`awk -F "\t" -v i=$((i+2)) 'NR == i { print $7; }' "$GENE_TABLE"`;
@@ -60,8 +53,6 @@ function fetch_seq {
 	local SEQ_ID="$4";
 	local SEQ_DB="$5";
 	local SEQ_COORD="$6";
-	local ASSEMBLY_FASTA="$7";
-	local DOWNLOAD_ASSEMBLY="$8";
 	> "$STDERR";
 	
 	# TO DO: Handle the case where cds is a concatenation
@@ -80,28 +71,9 @@ function fetch_seq {
 
 				if [[ "$SEQ_COORD" != "" ]]; then
 
-					if [[ "$DOWNLOAD_ASSEMBLY" == true ]]; then
-						esearch -db nucleotide -query "$SEQ_ID" 2>>"$STDERR" \
-						| efetch -format fasta > "$ASSEMBLY_FASTA" 2>>"$STDERR";
-
-						if [ -s "$STDERR" ]; then
-							echo "   * Unable to fetch the assembly ""$SEQ_ID"" from ""$SEQ_DB";
-							echo "     (please check internet connexion)";
-							rm "$ASSEMBLY_FASTA";
-							return;
-						elif [ ! -s "$ASSEMBLY_FASTA" ]; then
-							echo "   * Unable to fetch the assembly ""$SEQ_ID"" from ""$SEQ_DB";
-							echo "     (please check validity of this id)";
-							rm "$ASSEMBLY_FASTA";
-							return;
-						fi
-					elif [ ! -f "$ASSEMBLY_FASTA" ]; then
-						echo "   * Unable to find the assembly (please check why it has not been fetched from previous messages)";
-						echo "Assembly Not Available!" >> "$STDERR";
-						return;
-					fi			
-
-					awk -v coord="$SEQ_COORD" -f "subscripts/3_substr_assembly.awk" "$ASSEMBLY_FASTA" > "$SEQ_FASTA";
+					DOWNLOAD_LINK="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=""$SEQ_ID""&location=""$SEQ_COORD""&rettype=fasta&retmode=text";
+					
+					wget -q -O "$SEQ_FASTA" "$DOWNLOAD_LINK" 2>>"$STDERR";
 
 				else
 
@@ -159,24 +131,14 @@ function fill_seq {
 		}' "$INPUT_SEQ_TABLE" >> "$OUTPUT_SEQ_TABLE";
 }
 
-declare -A ASSEMBLY_DICT
 FETCH_STDERR=`mktemp`;
 
 echo "FETCH CDS AND PROTEIN SEQUENCES";
 for(( i=0; i<$NB_GENES; i++ )); do
 	echo "fetch entry n°""$((i+1))""/""$NB_GENES"": ""${GENE_NAME[$i]}"" gene" "[ ""${SPECIES_NAME[$i]}" "]";
 
-	DOWNLOAD_ASSEMBLY=false;
-	if [[ "${GENE_COORD[$i]}" != "" ]]; then
-		if [[ "${ASSEMBLY_DICT[${GENE_ID[$i]}]}" == "" ]]; then
-			DOWNLOAD_ASSEMBLY=true;
-			ASSEMBLY_DICT[${GENE_ID[$i]}]=1;
-		fi
-	fi
-
 	if [[ "${GENE_ID[$i]}" != "" ]]; then
-		fetch_seq "$FETCH_STDERR" "${CDS_FA[$i]}" "cds" "${GENE_ID[$i]}" "${DB_GENE_ID[$i]}" \
-			"${GENE_COORD[$i]}" "${ASSEMBLY[$i]}" "$DOWNLOAD_ASSEMBLY";
+		fetch_seq "$FETCH_STDERR" "${CDS_FA[$i]}" "cds" "${GENE_ID[$i]}" "${DB_GENE_ID[$i]}" "${GENE_COORD[$i]}";
 		if [ ! -s "$FETCH_STDERR" ]; then
 			fill_seq "$INPUT_SEQ_TABLE" "$OUTPUT_SEQ_TABLE" \
 			"${SPECIES_NAME[$i]}" "${GENE_NAME[$i]}" "cds" "${CDS_FA[$i]}";
@@ -194,4 +156,4 @@ done
 
 rm "$INPUT_SEQ_TABLE";
 rm "$FETCH_STDERR";
-rm -r "$ASSEMBLY_DIR";
+
