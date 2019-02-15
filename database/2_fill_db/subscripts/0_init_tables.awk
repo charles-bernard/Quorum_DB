@@ -40,6 +40,8 @@ BEGIN {
 	pubmed_id = $17;
 	signal_id = $18;
 	signal_info = $19;
+	quorum_peps = $20;
+	sigmol = $21;
 }
 
 NR == 1 {
@@ -54,15 +56,15 @@ NR == 1 {
 	print ncbi_tax_id "\t" gene_name "\t" "seq_type" > sequence_table;
 	print signal_id "\t" signal_supercategory "\t" signal_family \
 		"\t" signal_trivial_name "\t" signal_systematic_name \
-		"\t" smiles "\t" peptide_sequence \
-		"\t" signal_info "\t" "qs_system" > signal_table;
+		"\t" smiles "\t" peptide_sequence "\t" signal_info \
+		"\t" quorum_peps "\t" sigmol "\t" "qs_system" > signal_table;
 	print ncbi_tax_id > species_table;
 
 
 	# INIT LINES
 	print bio_process_id["quorum sensing"] "\t" "quorum sensing" > bioprocess_table
 	print "0\t\t\t" > reference_table;
-	print "0\t\t\t\t\t\t\t\t" > signal_table;
+	print "0\t\t\t\t\t\t\t\t\t\t" > signal_table;
 
 	n_signal = 0;
 }
@@ -142,7 +144,8 @@ NR > 1 {
 			preline_signal[signal_id] = signal_id "\t" signal_supercategory \
 			"\t" signal_family "\t" signal_trivial_name \
 			"\t" signal_systematic_name "\t" smiles \
-			"\t" peptide_sequence "\t" signal_info
+			"\t" peptide_sequence "\t" signal_info \
+			"\t" quorum_peps "\t" sigmol
 
 			n_signal++;
 		}

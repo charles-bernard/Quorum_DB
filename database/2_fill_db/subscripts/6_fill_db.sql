@@ -8,7 +8,7 @@
 
 /* LEVEL 1 TABLES */
 \COPY gene (species_name, gene_name, gene_id, db_gene_id, gene_coordinates, prot_id, db_prot_id) FROM 'input_tables/gene.csv' WITH DELIMITER E'\t' NULL AS '' CSV HEADER;
-\COPY signal (signal_id, signal_supercategory, signal_family, signal_trivial_name, signal_systematic_name, smiles, peptide_sequence, signal_info, qs_system, structure_img) FROM 'input_tables/signal.csv' WITH DELIMITER E'\t' NULL AS '' CSV HEADER;
+\COPY signal (signal_id, signal_supercategory, signal_family, signal_trivial_name, signal_systematic_name, smiles, peptide_sequence, signal_info, quorum_peps_id, sigmol_id, qs_system, structure_img) FROM 'input_tables/signal.csv' WITH DELIMITER E'\t' NULL AS '' CSV HEADER;
 
 /* LEVEL 2 TABLES */
 \copy function (species_name, gene_name, bio_process_id, signal_id, function, info, retrieval_status, reference_id) FROM 'input_tables/function.csv' WITH DELIMITER E'\t' NULL AS '' CSV HEADER;

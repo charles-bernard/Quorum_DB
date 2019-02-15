@@ -18,6 +18,8 @@
 		$is_coord = array();
 		$is_gene_id = array();
 		$is_prot_id = array();
+		$is_quorum_peps = array();
+		$is_sigmol = array();
 
 		for($i=0;$i < $n_fields;$i++) {
 			$column_name = pg_field_name($query_result, $i);
@@ -81,6 +83,18 @@
 				array_push($is_prot_id, true);
 			} else {
 				array_push($is_prot_id, false);
+			}
+
+			if($column_name == "quorum_peps_id") {
+				array_push($is_quorum_peps, true);
+			} else {
+				array_push($is_quorum_peps, false);
+			}
+
+			if($column_name == "sigmol_id") {
+				array_push($is_sigmol, true);
+			} else {
+				array_push($is_sigmol, false);
 			}
 		}
 
@@ -167,7 +181,7 @@
 						if($curr_table == "") {
 							echo('<img src="data/img/' . $img_file . '" height="500" width="500">');
 						} else {
-							echo('<img src="data/img/' . $img_file . '" height="150" width="150">');
+							echo('<img src="data/img/' . $img_file . '" border="1" height="150" width="150">');
 						}
 					} 
 				} else if($is_coord[$i]) {
@@ -187,6 +201,12 @@
 						echo('<a href="http://www.ncbi.nlm.nih.gov/nuccore/' . $record[$i] . '?report=graph"');
 						echo(' target="_blank" title="Look protein domains">' . $record[$i] . '</a>');
 					}
+				} else if($is_quorum_peps[$i]) {
+					echo('<a href="http://quorumpeps.ugent.be/quorumpepsmolecule.php?ID=' . $record[$i]);
+					echo('" target="_blank" title="Look quorum peps entry">' . $record[$i] . '</a>');
+				} else if($is_sigmol[$i]) {
+					echo('<a href="http://bioinfo.imtech.res.in/manojk/sigmol/record.php?details=' . $record[$i]);
+					echo('" target="_blank" title="Look quorum peps entry">' . $record[$i] . '</a>');
 				} else {
 					echo('<font face=' . $font_array[$i] . '>');
 					echo(nl2br($record[$i] . '&nbsp;&nbsp;'));

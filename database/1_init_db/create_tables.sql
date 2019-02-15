@@ -60,11 +60,11 @@ CREATE TABLE environment (
 CREATE TABLE gene (
 	species_name VARCHAR REFERENCES species ON UPDATE CASCADE,
 	gene_name VARCHAR,
+	prot_id VARCHAR,
+	db_prot_id VARCHAR,
 	gene_id VARCHAR,
 	db_gene_id VARCHAR,
 	gene_coordinates VARCHAR,
-	prot_id VARCHAR,
-	db_prot_id VARCHAR,
 	PRIMARY KEY (species_name, gene_name),
 	UNIQUE (species_name, gene_name)
 );
@@ -81,15 +81,18 @@ CREATE TABLE signal (
 	signal_supercategory VARCHAR,
 	CHECK (
 		(signal_supercategory='autoinducer peptide') or
-		(signal_supercategory='signaling molecule')),
+		(signal_supercategory='quorum sensing molecule')),
 	signal_family VARCHAR,
 	signal_trivial_name VARCHAR,
 	qs_system VARCHAR,
 	structure_img VARCHAR,
 	peptide_sequence VARCHAR,
 	signal_systematic_name VARCHAR,
-	smiles VARCHAR,
-	signal_info TEXT	
+	signal_info TEXT,
+	quorum_peps_id VARCHAR,
+	sigmol_id VARCHAR,
+	smiles VARCHAR
+		
 );
 
 
