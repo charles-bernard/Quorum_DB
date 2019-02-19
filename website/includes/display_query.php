@@ -168,7 +168,7 @@
 			for($i=0;$i<$n_fields;$i++) {
 				echo('<td align="' . $align[$i] . '">');
 				if($signal_link[$i]) {
-					echo('<a href="signal_report.php?val=' . $record[$i] . '" target="_blank" title="look QS information">');
+					echo('<a href="signal_report.php?val=' . $record[$i] . '" title="look QS information">');
 					echo('browse id ' . $record[$i] . '</a>');
 				} else if($ref_link[$i]) {
 					echo('<a href="http://www.ncbi.nlm.nih.gov/pubmed/' . $record[$i]);
