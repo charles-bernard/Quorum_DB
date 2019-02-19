@@ -1,7 +1,14 @@
 <?php
 
 	function print_table($query_result, $curr_table) {
-		echo('<table border=2 frame=box rules=groups>');
+
+		if($curr_table == "signal_characteristics") {
+			echo('<table border=0 frame=box rules=groups style="table-layout:fixed" width="70%">');
+		} else {
+			echo('<table border=2 frame=box rules=groups style="max-width:2000px">');
+		}
+
+		// style="table-layout:fixed" width="2000px"
 
 		// this return the number of fields in the queried table
 		$n_fields = pg_num_fields($query_result);
@@ -55,7 +62,8 @@
 			}
 
 			if($column_name == "genes" or $column_name == "full_lineage" 
-				or $column_name == "full_lineage_ranks" or $column_name == "functions") {
+				or $column_name == "full_lineage_ranks" or $column_name == "functions"
+				or $column_name == "gene_coordinates") {
 				array_push($align, "left");
 			} else {
 				array_push($align, "center");
@@ -178,7 +186,7 @@
 				} else if($is_img[$i]) {
 					if($record[$i]) {
 						$img_file = basename($record[$i]).PHP_EOL;
-						if($curr_table == "") {
+						if($curr_table == "signal_characteristics") {
 							echo('<img src="data/img/' . $img_file . '" height="500" width="500">');
 						} else {
 							echo('<img src="data/img/' . $img_file . '" border="1" height="150" width="150">');

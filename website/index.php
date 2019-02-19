@@ -76,7 +76,14 @@ if(isset($_POST['do_sort_asc'])) {
 				} else {
 					$order_statement = "";
 				}
-				$query = ("SELECT * FROM " . $curr_table . $where_statement . $order_statement . ";");
+
+				if($curr_table != "signal") {
+					$query = ("SELECT * FROM " . $curr_table . $where_statement . $order_statement . ";");
+				} else {
+					$query = ("SELECT signal_id, signal_supercategory, signal_family, signal_trivial_name,
+						qs_system, structure_img, signal_systematic_name, quorum_peps_id, sigmol_id
+						FROM " . $curr_table . $where_statement . $order_statement . ";");
+				}
 
 				// Execute the query, display the result and free it.
 				$result = pg_query($dbconn, $query);

@@ -28,9 +28,10 @@ if(isset($_GET['val'])){
 			}
 		?>
 
-		<table border = 0>
+
+		<h2> Reference(s) </h2>
+		<table border=0>
 			<td>
-			<h2> Reference(s) </h2>
 			<?php
 				$result = signal_id_2_ref($dbconn, $query_signal_id);
 				print_table($result);
@@ -39,10 +40,10 @@ if(isset($_GET['val'])){
 			</td>
 		</table>
 
-		<br>
-		<table border = 0>
+		<br><br>
+		<h2> Host Organism(s) </h2>
+		<table border=0>
 			<td>
-			<h2> Host Organism(s) </h2>
 			<?php
 				$result = signal_id_2_species($dbconn, $query_signal_id);
 				print_table($result);
@@ -51,10 +52,10 @@ if(isset($_GET['val'])){
 			</td>
 		</table>
 
-		<br>
-		<table border = 0>
+		<br><br>
+		<h2> Triggered response(s) </h2>
+		<table border=0>
 			<td>
-			<h2> Triggered response(s) </h2>
 			<?php
 				$result = signal_id_2_response($dbconn, $query_signal_id);
 				print_table($result);
@@ -63,10 +64,10 @@ if(isset($_GET['val'])){
 			</td>
 		</table>
 
-		<br>
-		<table border = 0>
+		<br><br>
+		<h2> Sequence of involved genes </h2>
+		<table border=0>
 			<td>
-			<h2> Sequence of involved genes </h2>
 			<?php
 				$result = signal_id_2_seq($dbconn, $query_signal_id);
 				print_table($result);
@@ -75,31 +76,41 @@ if(isset($_GET['val'])){
 			</td>
 		</table>
 
-		<br>
-		<table border = 0>
-			<tr>
-			<h2> Signal Characteristics </h2>
+		<br><br>
+		<h2> Signal Characteristics </h2>
+		<table border=0 frame=box>
+			<td>
 			<?php
 				$result = pg_query($dbconn, 
 					"SELECT signal_id, signal_supercategory, signal_family, signal_trivial_name,  	
-					signal_systematic_name, peptide_sequence, smiles
+					signal_systematic_name
 					FROM signal WHERE signal_id='{$query_signal_id}'");
-				print_table($result);
+				print_table($result, "signal_characteristics");
 				pg_free_result($result);
-				echo('<br>');
-			?>
-			</tr>
-			<tr>
-			<?php
+				echo("<br>");
+
 				$result = pg_query($dbconn, 
-					"SELECT signal_info AS Additional_Information, structure_img
+					"SELECT structure_img, signal_info AS Additional_Information
 					FROM signal WHERE signal_id='{$query_signal_id}'");
-				print_table($result);
+				print_table($result, "signal_characteristics");
+				pg_free_result($result);
+
+				$result = pg_query($dbconn, 
+					"SELECT peptide_sequence
+					FROM signal WHERE signal_id='{$query_signal_id}'");
+				print_table($result, "signal_characteristics");
+				pg_free_result($result);
+
+				$result = pg_query($dbconn, 
+					"SELECT smiles
+					FROM signal WHERE signal_id='{$query_signal_id}'");
+				print_table($result, "signal_characteristics");
 				pg_free_result($result);
 			?>
-			</tr>
+			</td>
 		</table>
 
+	<br><br>
 	<br>
 	</body>
 
