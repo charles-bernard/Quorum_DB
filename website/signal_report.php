@@ -110,6 +110,20 @@ if(isset($_GET['val'])){
 			</td>
 		</table>
 
+		<br><br>
+		<h2> External resources </h2>
+		<table border=0>
+			<td>
+			<?php
+				$result = pg_query($dbconn, 
+					"SELECT quorum_peps_id, sigmol_id 
+					FROM SIGNAL WHERE signal_id='{$query_signal_id}'");
+				print_table($result);
+				pg_free_result($result);
+			?>
+			</td>
+		</table>
+
 	<br><br>
 	<br>
 	</body>
