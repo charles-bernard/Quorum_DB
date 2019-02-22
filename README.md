@@ -28,7 +28,7 @@ ncbi = NCBITaxa()
 ncbi.update_taxonomy_database()
 ```
 
-## 2. Install Entrez Programming Utilities to fetch fasta sequences from NCBI databases based on their ID.
+## 2. Install Entrez Programming Utilities to fetch publication informations based on Pubmed ID.
 
 [Download the package](http://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/edirect.tar.gz)
 
