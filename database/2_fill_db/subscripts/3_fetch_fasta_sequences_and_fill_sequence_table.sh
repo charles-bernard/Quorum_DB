@@ -72,13 +72,12 @@ function fetch_seq {
 				if [[ "$SEQ_COORD" != "" ]]; then
 
 					DOWNLOAD_LINK="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=""$SEQ_ID""&location=""$SEQ_COORD""&rettype=fasta&retmode=text";
-					
 					wget -q -O "$SEQ_FASTA" "$DOWNLOAD_LINK" 2>>"$STDERR";
 
 				else
 
-					esearch -db nucleotide -query "$SEQ_ID" 2>>"$STDERR" \
-					| efetch -format fasta > "$SEQ_FASTA" 2>>"$STDERR";
+					DOWNLOAD_LINK="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=""$SEQ_ID""&rettype=fasta&retmode=text";
+					wget -q -O "$SEQ_FASTA" "$DOWNLOAD_LINK" 2>>"$STDERR";
 
 				fi
 
@@ -87,8 +86,8 @@ function fetch_seq {
 
 			if [[ "$SEQ_DB" == "Protein" ]]; then
 
-				esearch -db protein -query "$SEQ_ID" 2>>"$STDERR" \
-				| efetch -format fasta > "$SEQ_FASTA" 2>>"$STDERR";
+				DOWNLOAD_LINK="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=""$SEQ_ID""&rettype=fasta&retmode=text";
+				wget -q -O "$SEQ_FASTA" "$DOWNLOAD_LINK" 2>>"$STDERR";
 
 			fi
 
