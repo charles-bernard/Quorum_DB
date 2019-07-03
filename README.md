@@ -87,7 +87,7 @@ CREATE DATABASE <your_username>;
 
 Type ```\du``` to visualize the privileges of all registered roles
 
-Finally, quit psql by typing ```\q``` and deconnect as superuser by typing ```Ctrl+D```
+Finally, quit psql by typing ```\q``` and disconnect as superuser by typing ```Ctrl+D```
 
 ## 2. Create the Quorum_DB database
 
