@@ -239,7 +239,7 @@ sudo a2ensite webserver_quorum_db
 sudo service apache2 reload
 ```
 
-Add server quorum_db inside your list of hosts by simply adding the line ```127.0.0.1    webserver.dev``` to ```etc/hosts``` file
+Add server quorum_db inside your list of hosts by simply adding the line ```127.0.0.1    quorum_db``` to ```etc/hosts``` file
 
 ```bash
 sudo gedit /etc/hosts
