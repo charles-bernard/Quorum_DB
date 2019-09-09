@@ -10,11 +10,14 @@ if(isset($_GET['val'])){
 
 <html>
 
-	<?php include 'includes/head.php' ?>
+	<?php 
+		include 'includes/head.php';
+		include 'includes/banner_and_menu.php'; 
+	?>
 
 	<body>
-		<?php 
-			include 'includes/banner_and_menu.php';
+
+		<?php
 			include 'includes/display_query.php';
 			include 'includes/queries.php';
 		?>
@@ -28,13 +31,12 @@ if(isset($_GET['val'])){
 			}
 		?>
 
-
 		<h2> Reference(s) </h2>
 		<table border=0>
 			<td>
 			<?php
 				$result = signal_id_2_ref($dbconn, $query_signal_id);
-				print_table($result);
+				print_table($result, "result");
 				pg_free_result($result);
 			?>
 			</td>
@@ -46,7 +48,7 @@ if(isset($_GET['val'])){
 			<td>
 			<?php
 				$result = signal_id_2_species($dbconn, $query_signal_id);
-				print_table($result);
+				print_table($result, "result");
 				pg_free_result($result);
 			?>
 			</td>
@@ -58,7 +60,7 @@ if(isset($_GET['val'])){
 			<td>
 			<?php
 				$result = signal_id_2_response($dbconn, $query_signal_id);
-				print_table($result);
+				print_table($result, "result");
 				pg_free_result($result);
 			?>
 			</td>
@@ -70,7 +72,7 @@ if(isset($_GET['val'])){
 			<td>
 			<?php
 				$result = signal_id_2_seq($dbconn, $query_signal_id);
-				print_table($result);
+				print_table($result, "result");
 				pg_free_result($result);
 			?>
 			</td>
@@ -118,7 +120,7 @@ if(isset($_GET['val'])){
 				$result = pg_query($dbconn, 
 					"SELECT quorum_peps_id, sigmol_id 
 					FROM SIGNAL WHERE signal_id='{$query_signal_id}'");
-				print_table($result);
+				print_table($result, "result");
 				pg_free_result($result);
 			?>
 			</td>
